@@ -1,0 +1,6 @@
+framework module Pods_SavePass {
+  umbrella header "Pods-SavePass-umbrella.h"
+
+  export *
+  module * { export * }
+}

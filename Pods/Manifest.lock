@@ -1,0 +1,38 @@
+PODS:
+  - AppLocker (2.0):
+    - Valet
+  - Realm (3.13.1):
+    - Realm/Headers (= 3.13.1)
+  - Realm/Headers (3.13.1)
+  - RealmSwift (3.13.1):
+    - Realm (= 3.13.1)
+  - SparrowKit (1.5.3)
+  - SPStorkController (1.5.2)
+  - Valet (3.2.3)
+
+DEPENDENCIES:
+  - AppLocker
+  - RealmSwift
+  - SparrowKit
+  - SPStorkController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AppLocker
+    - Realm
+    - RealmSwift
+    - SparrowKit
+    - SPStorkController
+    - Valet
+
+SPEC CHECKSUMS:
+  AppLocker: ad734b8027d26ae5cbb4a70eed2bed30159c3b71
+  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
+  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  SparrowKit: 8a2991c81d6ab3038d4a41a98a1a73ea17d1a977
+  SPStorkController: e318aa012951b535380a5aa277405ef1bd09b75e
+  Valet: 4af0382d4a94db5c7861504f751884f653437d24
+
+PODFILE CHECKSUM: 1a30a41ecba6c88566c4ef4fc6b5dff1a20c7503
+
+COCOAPODS: 1.5.3
