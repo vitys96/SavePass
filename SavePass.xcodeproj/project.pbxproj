@@ -102,6 +102,7 @@
 		F5546D23222C4148003CE563 /* SavePass */ = {
 			isa = PBXGroup;
 			children = (
+				F5546D28222C4148003CE563 /* Main.storyboard */,
 				F5546D5B222C43D8003CE563 /* Extensions.swift */,
 				F5546D24222C4148003CE563 /* AppDelegate.swift */,
 				F5546D4A222C428B003CE563 /* SitesCollectionView */,
@@ -110,7 +111,6 @@
 				F5546D5D222C464F003CE563 /* Realm */,
 				F5546D5E222C465A003CE563 /* PreAddSite */,
 				F5546D2B222C4149003CE563 /* Assets.xcassets */,
-				F5546D28222C4148003CE563 /* Main.storyboard */,
 				F5546D51222C4336003CE563 /* SiteManager.swift */,
 				F5546D2D222C4149003CE563 /* LaunchScreen.storyboard */,
 				F5546D30222C4149003CE563 /* Info.plist */,
@@ -460,7 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kaboo.SavePass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -479,7 +479,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kaboo.SavePass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

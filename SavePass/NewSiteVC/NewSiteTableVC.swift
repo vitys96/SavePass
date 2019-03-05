@@ -15,6 +15,8 @@ class NewSiteTableVC: UITableViewController {
     
     var selectedSite: SiteList?
     
+    @IBOutlet weak var siteImageView: UIImageView!
+    
     @IBOutlet weak var siteName: UITextField!
     
     @IBOutlet weak var siteAddress: UITextField!
@@ -25,8 +27,12 @@ class NewSiteTableVC: UITableViewController {
     
     @IBOutlet weak var copySiteLoginOutlet: UIButton!
     @IBOutlet weak var copySitePasswordOutlet: UIButton!
+    @IBOutlet weak var showHidePassword: UIButton!
     
     var isDeletedVisible: Bool!
+    var toggle = true
+    
+    var imageViewString = ""
     
     
     @IBAction func cancelBarButtonItem(_ sender: Any) {
@@ -60,10 +66,21 @@ class NewSiteTableVC: UITableViewController {
                 sites.setValue(siteLogin, forKey: "siteLogin")
                 sites.setValue(sitePassword, forKey: "sitePassword")
             }
-            
-            
-            self.navigationController?.popToRootViewController(animated: true)
         }
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
+    @IBAction func LoginSiteCopyButton(_ sender: Any) {
+        copyTextInTextField(your: siteLogin)
+    }
+    
+    @IBAction func PasswordSiteCopyButton(_ sender: Any) {
+        copyTextInTextField(your: sitePassword)
+    }
+    @IBAction func showHidePasswd(_ sender: UIButton) {
+        
+        switchShowHidePasButton(showHideButton: showHidePassword, variable: &toggle)
     }
     
     
@@ -85,30 +102,22 @@ class NewSiteTableVC: UITableViewController {
         
     }
     
-    @IBAction func LoginSiteCopyButton(_ sender: Any) {
-        copyTextInTextField(your: siteLogin)
-    }
-    
-    @IBAction func PasswordSiteCopyButton(_ sender: Any) {
-        copyTextInTextField(your: sitePassword)
-    }
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        siteImageView.image = UIImage(named: imageViewString)
         
         siteName.text = selectedSite?.siteName
         siteAddress.text = selectedSite?.siteAddress
         siteLogin.text = selectedSite?.siteLogin
         sitePassword.text = selectedSite?.sitePassword
         
-        siteLogin.addTarget(self, action: #selector(loginFieldChanged), for: .editingChanged)
-        sitePassword.addTarget(self, action: #selector(loginFieldChanged), for: .editingChanged)
+        siteLogin.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
+        sitePassword.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
         
     }
     
-    @objc private func loginFieldChanged() {
+    @objc private func logPasTextFieldDidChanged() {
         
         guard let login = siteLogin.text else { return }
         if !(login.isEmpty) {
@@ -121,9 +130,11 @@ class NewSiteTableVC: UITableViewController {
         guard let password = sitePassword.text else { return }
         if !(password.isEmpty) {
             enableCopyButton(copyButton: copySitePasswordOutlet, enabled: true)
+            enableCopyButton(copyButton: showHidePassword, enabled: true)
         }
         else {
             enableCopyButton(copyButton: copySitePasswordOutlet, enabled: false)
+            enableCopyButton(copyButton: showHidePassword, enabled: false)
         }
     }
     
@@ -137,6 +148,21 @@ class NewSiteTableVC: UITableViewController {
             copyButton.alpha = 0.2
             copyButton.isEnabled = false
         }
+    }
+    
+    private func switchShowHidePasButton(showHideButton: UIButton, variable: inout Bool){
+
+        if variable {
+            showHideButton.setImage(UIImage(named: "invisible"), for: .normal)
+            showHideButton.setTitleColor(.blue, for: .normal)
+            sitePassword.isSecureTextEntry = false
+        }
+
+        else {
+            showHideButton.setImage(UIImage(named: "visible"), for: .normal)
+            sitePassword.isSecureTextEntry = true
+        }
+        variable = !variable
     }
     
     
@@ -158,18 +184,39 @@ class NewSiteTableVC: UITableViewController {
     //    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return CGFloat.leastNormalMagnitude
+        default:
+            break
+        }
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 30.0
+        default:
+            break
+        }
+        return 0
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
         case 0:
-            return 4
-        case 1:
             return 1
+        case 1:
+            return 4
         case 2:
+            return 1
+        case 3:
             guard let _ = isDeletedVisible else { return 0 }
             return 1
         default:
