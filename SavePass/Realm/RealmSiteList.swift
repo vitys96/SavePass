@@ -11,6 +11,7 @@ import UIKit
 import RealmSwift
 
 class SiteList: Object {
+    @objc dynamic var siteImageView: Data?
     @objc dynamic var siteName = ""
     @objc dynamic var siteAddress = ""
     @objc dynamic var siteLogin = ""

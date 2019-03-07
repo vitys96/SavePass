@@ -10,10 +10,10 @@ import UIKit
 
 class PreAddNSCollectionViewCell: UICollectionViewCell {
     
-    var team: Team? {
+    var site: Team? {
         didSet {
-            guard let teamImage = team?.image else { return }
-            guard let teamName = team?.name else { return }
+            guard let teamImage = site?.image else { return }
+            guard let teamName = site?.name else { return }
             
             teamImageVieW.image = UIImage(named: teamImage)
             teamNameLabel.text = teamName

@@ -13,7 +13,7 @@ struct Team {
     let name: String?
 }
 
-var teams = [Team(image: "twitter", name: "Twitter"),
+var preAddSites = [Team(image: "twitter", name: "Twitter"),
              Team(image: "facebook", name: "Facebook"),
              Team(image: "gmail", name: "Gmail"),
              Team(image: "youtube", name: "youtube"),
@@ -23,3 +23,7 @@ var teams = [Team(image: "twitter", name: "Twitter"),
              Team(image: "instagram", name: "Instagram"),
              Team(image: "flickr", name: "Flickr")]
 
+let sorted = preAddSites.sorted(by: {
+    guard let nameOne = $0.name, let nameTwo = $1.name else { return false }
+    return nameOne < nameTwo
+})

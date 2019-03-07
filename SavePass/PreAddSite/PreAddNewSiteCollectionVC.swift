@@ -12,30 +12,31 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     
     let cellId = "cell"
     
-    let sorted = teams.sorted(by: {
-        guard let nameOne = $0.name, let nameTwo = $1.name else { return false }
-        return nameOne < nameTwo
-    })
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateUI()
+        
+    }
+    
+    
+    func updateUI() {
         collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
-        
-        
         collectionView?.register(PreAddNSCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    
+    
+    // MARK: - Table View data source
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teams.count
+        return preAddSites.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PreAddNSCollectionViewCell
-
-       
         
-        cell.team = sorted[indexPath.item]
+        cell.site = sorted[indexPath.item]
         return cell
     }
     
@@ -46,6 +47,10 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
+    
+    
+    
+    // MARK: - Table View delegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

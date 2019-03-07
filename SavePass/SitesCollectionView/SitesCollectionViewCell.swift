@@ -27,9 +27,9 @@ class SitesCollectionViewCell: UICollectionViewCell {
         self.addSubview(grayView)
         self.addSubview(loginLabel)
         
-        siteImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 60)
-        grayView.anchor(top: siteImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        loginLabel.anchor(top: siteImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0)
+        siteImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 60)
+        grayView.anchor(top: siteImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        loginLabel.anchor(top: nil, left: leftAnchor, bottom: grayView.bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 0, paddingRight: 0)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

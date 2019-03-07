@@ -32,7 +32,7 @@ class NewSiteTableVC: UITableViewController {
     var isDeletedVisible: Bool!
     var toggle = true
     
-    var imageViewString = ""
+    var imageViewString = String()
     
     
     @IBAction func cancelBarButtonItem(_ sender: Any) {
@@ -46,10 +46,11 @@ class NewSiteTableVC: UITableViewController {
         guard let siteAddress = siteAddress.text, !siteNameLabel.isEmpty else { return }
         guard let siteLogin = siteLogin.text, !siteLogin.isEmpty else { return }
         guard let sitePassword = sitePassword.text, !sitePassword.isEmpty else { return }
+        guard let imageData = siteImageView.image?.pngData() else { return }
         
         if selectedSite == nil {
             do {
-                let all = SiteList(value: [siteNameLabel, siteAddress, siteLogin, sitePassword ])
+                let all = SiteList(value: [imageData,siteNameLabel, siteAddress, siteLogin, sitePassword ])
                 try realm.write {
                     realm.add(all)
                 }
@@ -71,6 +72,8 @@ class NewSiteTableVC: UITableViewController {
     }
     
     
+    // MARK: - Action кнопкок скопировать и показать пароль
+    
     @IBAction func LoginSiteCopyButton(_ sender: Any) {
         copyTextInTextField(your: siteLogin)
     }
@@ -83,7 +86,7 @@ class NewSiteTableVC: UITableViewController {
         switchShowHidePasButton(showHideButton: showHidePassword, variable: &toggle)
     }
     
-    
+    // MARK: - Удалить объект (сайт) из БД
     @IBAction func DeleteSiteData(_ sender: Any) {
         
         let alertController = UIAlertController(title: "Удалить учетные данные", message: "Удаленные данные нельзя восставить.", preferredStyle: .alert)
@@ -102,6 +105,7 @@ class NewSiteTableVC: UITableViewController {
         
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,6 +120,7 @@ class NewSiteTableVC: UITableViewController {
         sitePassword.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
         
     }
+    
     
     @objc private func logPasTextFieldDidChanged() {
         
@@ -162,26 +167,15 @@ class NewSiteTableVC: UITableViewController {
             showHideButton.setImage(UIImage(named: "visible"), for: .normal)
             sitePassword.isSecureTextEntry = true
         }
-        variable = !variable
+        variable.toggle()
     }
     
     
     
     
     
-    // MARK: - Table view data source
+    // MARK: - Table View data source
     
-    //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let label = UILabel()
-    //        label.backgroundColor = UIColor(hexValue: "#e0e0e0", alpha: 1.0)
-    //        label.text = sections[section]
-    //
-    //        return label
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //        return 60
-    //    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -224,6 +218,8 @@ class NewSiteTableVC: UITableViewController {
         }
         return 0
     }
+    
+     // MARK: - Table View delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

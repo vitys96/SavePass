@@ -61,12 +61,10 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     
+    // MARK: - Table View data source
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if items.count != 0 {
             return items.count
-        }
-        return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -75,6 +73,9 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         let item = items[indexPath.row]
         
         cell.loginLabel.text = item.siteLogin
+        if let image = UIImage(data: item.siteImageView!) {
+            cell.siteImageView.image = image
+        }
         return cell
     }
     
@@ -86,19 +87,22 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
     
+    
+    // MARK: - Table View delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = items[indexPath.row]
-        
         let modal = ModalVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.customHeight = 400
         modal.transitioningDelegate = transitionDelegate
         modal.delegate = self
         modal.selectedSite = item
+        
         modal.loginLabel = item.siteLogin
         modal.passwordLabel = item.sitePassword
         modal.navBar.titleLabel.text = item.siteName
+        
         modal.modalPresentationStyle = .custom
         present(modal, completion: nil)
         selectedSite = item
@@ -107,6 +111,8 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
 }
 
+// MARK: - EXTENSIONS
+
 extension SitesCollectionVC: ModalVCDelegate {
     func didChangeInfo() {
         self.dismiss(animated: true) { [weak self] in
@@ -114,7 +120,8 @@ extension SitesCollectionVC: ModalVCDelegate {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "NewSiteTableVC") as! NewSiteTableVC
             vc.isDeletedVisible = true
-            vc.selectedSite = self!.selectedSite
+            guard let selectedSite = self?.selectedSite else { return }
+            vc.selectedSite = selectedSite
             
             self?.navigationController?.pushViewController(vc, animated: true)
         }
