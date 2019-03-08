@@ -14,15 +14,32 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateUI()
         
+    }
+    @IBAction func cancelBarButtonItem(_ sender: UIBarButtonItem) {
+        
+        fadeInAnimationsNavigationController()
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     
     func updateUI() {
         collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
         collectionView?.register(PreAddNSCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        
+    }
+    func setUpNavBar(){
+        //For title in navigation bar
+        self.navigationController?.view.backgroundColor = UIColor.white
+        self.navigationController?.view.tintColor = UIColor.orange
+        self.navigationItem.title = "About Us"
+        
+        //For back button in navigation bar
+        let backButton = UIBarButtonItem()
+        backButton.title = "Ррараар"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     
@@ -56,9 +73,14 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "NewSiteTableVC") as? NewSiteTableVC else { return }
+        let sortedIndexPathRow = sorted[indexPath.row]
         
-        guard let sortedSiteImageName = sorted[indexPath.row].image else { return }
+        guard let sortedSiteImageName = sortedIndexPathRow.image else { return }
         vc.imageViewString = sortedSiteImageName
+        vc.nameOfSiteString = sortedIndexPathRow.name ?? "nil"
+        vc.siteAddressString = sortedIndexPathRow.address ?? "nil"
+        
+        
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

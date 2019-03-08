@@ -2,6 +2,15 @@ import UIKit
 
 extension UIViewController {
     
+    func fadeInAnimationsNavigationController() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.fade
+        transition.subtype = CATransitionSubtype.fromLeft
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
+    }
+    
     func copyTextInLabel(your label: UILabel) {
         
         let alertController = UIAlertController(title: "Cкопировано", message: nil, preferredStyle: .alert)
@@ -24,6 +33,21 @@ extension UIViewController {
         }
         let pasteboard = UIPasteboard.general
         pasteboard.string = textField.text
+    }
+    
+    func switchShowHidePasButton(showHideButton: UIButton, securityTextEntry: UITextField, variable: inout Bool) {
+        
+        if variable {
+            showHideButton.setImage(UIImage(named: "invisible"), for: .normal)
+            showHideButton.setTitleColor(.blue, for: .normal)
+            securityTextEntry.isSecureTextEntry = false
+        }
+            
+        else {
+            showHideButton.setImage(UIImage(named: "visible"), for: .normal)
+            securityTextEntry.isSecureTextEntry = true
+        }
+        variable.toggle()
     }
     
 }

@@ -31,8 +31,9 @@ class NewSiteTableVC: UITableViewController {
     
     var isDeletedVisible: Bool!
     var toggle = true
-    
     var imageViewString = String()
+    var nameOfSiteString = String()
+    var siteAddressString = String()
     
     
     @IBAction func cancelBarButtonItem(_ sender: Any) {
@@ -82,8 +83,7 @@ class NewSiteTableVC: UITableViewController {
         copyTextInTextField(your: sitePassword)
     }
     @IBAction func showHidePasswd(_ sender: UIButton) {
-        
-        switchShowHidePasButton(showHideButton: showHidePassword, variable: &toggle)
+        switchShowHidePasButton(showHideButton: showHidePassword, securityTextEntry: sitePassword, variable: &toggle)
     }
     
     // MARK: - Удалить объект (сайт) из БД
@@ -109,12 +109,21 @@ class NewSiteTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        siteImageView.image = UIImage(named: imageViewString)
+        if selectedSite == nil {
+            siteImageView.image = UIImage(named: imageViewString)
+            siteName.text = nameOfSiteString
+            siteAddress.text = siteAddressString
+        }
+        else {
+            siteName.text = selectedSite?.siteName
+            siteAddress.text = selectedSite?.siteAddress
+            siteLogin.text = selectedSite?.siteLogin
+            sitePassword.text = selectedSite?.sitePassword
+            guard let imageData = selectedSite?.siteImageView else { return }
+            siteImageView.image = UIImage(data: imageData)
+        }
         
-        siteName.text = selectedSite?.siteName
-        siteAddress.text = selectedSite?.siteAddress
-        siteLogin.text = selectedSite?.siteLogin
-        sitePassword.text = selectedSite?.sitePassword
+        
         
         siteLogin.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
         sitePassword.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
@@ -155,20 +164,7 @@ class NewSiteTableVC: UITableViewController {
         }
     }
     
-    private func switchShowHidePasButton(showHideButton: UIButton, variable: inout Bool){
-
-        if variable {
-            showHideButton.setImage(UIImage(named: "invisible"), for: .normal)
-            showHideButton.setTitleColor(.blue, for: .normal)
-            sitePassword.isSecureTextEntry = false
-        }
-
-        else {
-            showHideButton.setImage(UIImage(named: "visible"), for: .normal)
-            sitePassword.isSecureTextEntry = true
-        }
-        variable.toggle()
-    }
+    
     
     
     

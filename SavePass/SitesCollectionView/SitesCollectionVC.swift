@@ -18,14 +18,9 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     @IBAction func addNewsite(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "PreAddNewSiteCollectionVC") as? PreAddNewSiteCollectionVC else { return }
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.type = CATransitionType.fade
-        transition.subtype = CATransitionSubtype.fromLeft
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        fadeInAnimationsNavigationController()
         self.navigationController?.pushViewController(vc, animated: false)
     }
     

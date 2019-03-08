@@ -18,6 +18,7 @@ class ModalVC: UIViewController {
     var loginLabel = ""
     var passwordLabel = ""
     var titleLabelModal = String()
+    var toggle = true
     
     let navBar = SPFakeBarView(style: .stork)
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -31,8 +32,8 @@ class ModalVC: UIViewController {
         return label
     }()
     
-    lazy var siteLoginLabel: UILabel = {
-        let siteLabel = UILabel()
+    lazy var siteLoginTextField: UITextField = {
+        let siteLabel = UITextField()
         siteLabel.textColor = .black
         siteLabel.text = loginLabel
         return siteLabel
@@ -53,8 +54,9 @@ class ModalVC: UIViewController {
         return label
     }()
     
-    lazy var sitePasswordLabel: UILabel = {
-        let passwdLabel = UILabel()
+    lazy var sitePasswordTextField: UITextField = {
+        let passwdLabel = UITextField()
+        passwdLabel.isSecureTextEntry = true
         passwdLabel.textColor = .black
         passwdLabel.text = passwordLabel
         return passwdLabel
@@ -84,6 +86,14 @@ class ModalVC: UIViewController {
         return copy
     }()
     
+    lazy var showPassword: UIButton = {
+        let copy = UIButton()
+        copy.setBackgroundImage(UIImage(named: "visible"), for: .normal)
+        copy.contentMode = .scaleAspectFit
+        copy.addTarget(self, action: #selector(showHidePasswd), for: .touchUpInside)
+        return copy
+    }()
+    
     var presentControllerButton = UIButton.init(type: UIButton.ButtonType.system)
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,30 +111,21 @@ class ModalVC: UIViewController {
         
         self.navBar.rightButton.setTitle("Изменить", for: .normal)
         self.navBar.rightButton.addTarget(self, action: #selector(changeInfo), for: .touchUpInside)
-        //        self.view.addSubview(self.navBar)
-        //
-        //
-        //        self.view.addSubview(self.siteLoginLabel)
-        //        self.view.addSubview(self.sitePasswordLabel)
-        //        self.view.addSubview(self.loginLabelText)
-        //        self.view.addSubview(self.passwordLabelText)
-        //        self.view.addSubview(self.separator)
-        //        self.view.addSubview(self.separatorTwo)
-        //        self.view.addSubview(self.copyButton)
-        //        self.view.addSubview(self.copyButtonTwo)
+
         
-        [navBar, siteLoginLabel, sitePasswordLabel, loginLabelText, passwordLabelText, separator, separatorTwo, copyButton, copyButtonTwo].forEach(view.addSubview)
+        [navBar, siteLoginTextField, sitePasswordTextField, loginLabelText, passwordLabelText, separator, separatorTwo, copyButton, copyButtonTwo, showPassword].forEach(view.addSubview)
         
         
     }
     
     @objc func copyLoginText() {
-        copyTextInLabel(your: siteLoginLabel)
+        copyTextInTextField(your: siteLoginTextField)
     }
     
     @objc func copyPasswordText() {
-        copyTextInLabel(your: sitePasswordLabel)
+        copyTextInTextField(your: sitePasswordTextField)
     }
+    
     
     @objc func changeInfo() {
         self.delegate?.didChangeInfo()
@@ -146,6 +147,12 @@ class ModalVC: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    @objc private func showHidePasswd() {
+        switchShowHidePasButton(showHideButton: showPassword, securityTextEntry: sitePasswordTextField, variable: &toggle)
+    }
+    
+    
+    
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (contex) in
@@ -161,30 +168,32 @@ class ModalVC: UIViewController {
     
     func updateLayout(with size: CGSize) {
         
-        self.separator.frame = CGRect(x: 0, y: 0, width: siteLoginLabel.frame.width, height: 2)
+        self.separator.frame = CGRect(x: 0, y: 0, width: siteLoginTextField.frame.width, height: 2)
         self.separator.center.x = size.width / 2
         self.separator.center.y = size.height / 2
         
         self.loginLabelText.frame = CGRect(x: 0, y: 0, width: 90, height: 30)
-        self.loginLabelText.anchor(top: nil, left: siteLoginLabel.leftAnchor , bottom: siteLoginLabel.topAnchor, right: siteLoginLabel.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        self.loginLabelText.anchor(top: nil, left: siteLoginTextField.leftAnchor , bottom: siteLoginTextField.topAnchor, right: siteLoginTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
-        self.siteLoginLabel.frame = CGRect(x: 0, y: 0, width: 230, height: 40)
-        self.siteLoginLabel.center.x = size.width / 2
-        self.siteLoginLabel.center.y = separator.center.y - 20
+        self.siteLoginTextField.frame = CGRect(x: 0, y: 0, width: 230, height: 40)
+        self.siteLoginTextField.center.x = size.width / 2
+        self.siteLoginTextField.center.y = separator.center.y - 20
         
-        self.copyButton.anchor(top: siteLoginLabel.topAnchor, left: nil, bottom: nil, right: siteLoginLabel.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        self.copyButton.anchor(top: siteLoginTextField.topAnchor, left: nil, bottom: nil, right: siteLoginTextField.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
         
         self.passwordLabelText.frame = CGRect(x: 0, y: 0, width: 90, height: 30)
-        self.passwordLabelText.anchor(top: separator.bottomAnchor, left: sitePasswordLabel.leftAnchor , bottom: sitePasswordLabel.topAnchor, right: sitePasswordLabel.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        self.passwordLabelText.anchor(top: separator.bottomAnchor, left: sitePasswordTextField.leftAnchor , bottom: sitePasswordTextField.topAnchor, right: sitePasswordTextField.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         
-        self.sitePasswordLabel.frame = CGRect(x: 0, y: 0, width: 230, height: 30)
-        self.sitePasswordLabel.center.x = size.width / 2
-        self.sitePasswordLabel.center.y = separator.center.y + 50
+        self.sitePasswordTextField.frame = CGRect(x: 0, y: 0, width: 230, height: 25)
+        self.sitePasswordTextField.center.x = size.width / 2
+        self.sitePasswordTextField.center.y = separator.center.y + 50
         
-        self.copyButtonTwo.anchor(top: sitePasswordLabel.topAnchor, left: nil, bottom: nil, right: sitePasswordLabel.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
+        self.copyButtonTwo.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: sitePasswordTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 20, height: 20)
         
-        self.separatorTwo.anchor(top: sitePasswordLabel.bottomAnchor, left: sitePasswordLabel.leftAnchor, bottom: nil, right: sitePasswordLabel.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sitePasswordLabel.frame.width, height: 2)
+        self.showPassword.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: copyButtonTwo.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 20, height: 20)
+        
+        self.separatorTwo.anchor(top: sitePasswordTextField.bottomAnchor, left: sitePasswordTextField.leftAnchor, bottom: nil, right: sitePasswordTextField.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: sitePasswordTextField.frame.width, height: 2)
     }
 }
 

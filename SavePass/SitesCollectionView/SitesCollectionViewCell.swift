@@ -27,8 +27,8 @@ class SitesCollectionViewCell: UICollectionViewCell {
         self.addSubview(grayView)
         self.addSubview(loginLabel)
         
-        siteImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 60)
-        grayView.anchor(top: siteImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        siteImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 50, height: 50)
+        grayView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 20)
         loginLabel.anchor(top: nil, left: leftAnchor, bottom: grayView.bottomAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 0, paddingRight: 0)
     }
     
