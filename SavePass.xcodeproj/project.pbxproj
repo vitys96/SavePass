@@ -24,6 +24,7 @@
 		F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D59222C4383003CE563 /* PreAddSiteManager.swift */; };
 		F5546D5C222C43D8003CE563 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D5B222C43D8003CE563 /* Extensions.swift */; };
 		F5546D62222C496E003CE563 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5546D61222C496E003CE563 /* LocalAuthentication.framework */; };
+		F586F9A82235A83300B5D504 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586F9A72235A83300B5D504 /* DBManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F5546D59222C4383003CE563 /* PreAddSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddSiteManager.swift; sourceTree = "<group>"; };
 		F5546D5B222C43D8003CE563 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F5546D61222C496E003CE563 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		F586F9A72235A83300B5D504 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F5546D53222C4349003CE563 /* RealmSiteList.swift */,
+				F586F9A72235A83300B5D504 /* DBManager.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				F5546D54222C4349003CE563 /* RealmSiteList.swift in Sources */,
 				F5546D25222C4148003CE563 /* AppDelegate.swift in Sources */,
 				F5546D58222C4374003CE563 /* PreAddNSCollectionViewCell.swift in Sources */,
+				F586F9A82235A83300B5D504 /* DBManager.swift in Sources */,
 				F5546D50222C4320003CE563 /* NewSiteTableViewCell.swift in Sources */,
 				F5546D47222C423D003CE563 /* SitesCollectionVC.swift in Sources */,
 				F5546D4C222C42AE003CE563 /* ModalVC.swift in Sources */,

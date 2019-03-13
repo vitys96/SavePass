@@ -21,7 +21,7 @@ var preAddSites = [
     Team(image: "gmail", name: "Gmail", address: "gmail.com"),
     Team(image: "youtube", name: "YouTube", address: "youtube"),
     Team(image: "skype", name: "Skype", address: "skype.com"),
-    Team(image: "vk", name: "VK", address: "vk"),
+    Team(image: "vk", name: "VK", address: "vk.com"),
     Team(image: "avito", name: "Avito", address: "avito.ru"),
     Team(image: "instagram", name: "Instagram", address: "instagram.com"),
     Team(image: "flickr", name: "Flickr", address: "flickr.com")

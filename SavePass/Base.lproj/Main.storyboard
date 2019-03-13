@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -376,6 +377,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUR-c1-y1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2588" y="197"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4Cq-dK-UB6">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="cId-se-zEx" customClass="ViewController" customModule="SavePass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QGO-IY-rW7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7M2-po-7xX">
+                                <rect key="frame" x="137" y="322.5" width="101" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="sqlnxjqsx"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7M2-po-7xX" firstAttribute="centerX" secondItem="vtB-Jb-0WZ" secondAttribute="centerX" id="WuQ-D9-ikA"/>
+                            <constraint firstItem="7M2-po-7xX" firstAttribute="centerY" secondItem="vtB-Jb-0WZ" secondAttribute="centerY" id="wTE-Rv-ZIv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vtB-Jb-0WZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R9T-iq-Fmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3086" y="-494"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wvH-k9-awx">

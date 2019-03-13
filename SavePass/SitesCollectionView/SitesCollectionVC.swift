@@ -6,14 +6,15 @@ import AppLocker
 
 class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
     let cellId = "cell"
     
     let realm = try! Realm()
-    var items: Results<SiteList>! {
-        get {
-            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
-        }
-    }
+//    var items: Results<SiteList>! {
+//        get {
+//            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
+//        }
+//    }
     var selectedSite: SiteList!
     
     @IBAction func addNewsite(_ sender: Any) {
@@ -26,6 +27,14 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let userDefaults = UserDefaults.standard
+        let wasWatched = userDefaults.bool(forKey: "wasWatched")
+        guard !wasWatched else { return }
     }
     
     override func viewDidLoad() {
@@ -59,13 +68,18 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     // MARK: - Table View data source
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return items.count
+            return DBManager.sharedInstance.getDataFromSiteList().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SitesCollectionViewCell
         
-        let item = items[indexPath.row]
+        //        let index = Int(indexPath.item)
+        let item = DBManager.sharedInstance.getDataFromSiteList()[indexPath.row] as SiteList
+        
+        //        let item = items[indexPath.row]
         
         cell.loginLabel.text = item.siteLogin
         if let image = UIImage(data: item.siteImageView!) {
@@ -86,21 +100,27 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     // MARK: - Table View delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let item = items[indexPath.row]
+        let index = indexPath.item
+        
+        let site = DBManager.sharedInstance.getDataFromSiteList()[index] as SiteList
+        
         let modal = ModalVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.customHeight = 400
         modal.transitioningDelegate = transitionDelegate
         modal.delegate = self
-        modal.selectedSite = item
+        modal.selectedSite = site
         
-        modal.loginLabel = item.siteLogin
-        modal.passwordLabel = item.sitePassword
-        modal.navBar.titleLabel.text = item.siteName
+        modal.loginLabel = site.siteLogin
+        modal.passwordLabel = site.sitePassword
+        modal.navBar.titleLabel.text = site.siteName
         
         modal.modalPresentationStyle = .custom
         present(modal, completion: nil)
-        selectedSite = item
+        
+        self.selectedSite = site
+        print (selectedSite)
+        
         
     }
     

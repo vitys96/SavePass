@@ -11,10 +11,16 @@ import UIKit
 import RealmSwift
 
 class SiteList: Object {
-    @objc dynamic var siteImageView: Data?
+    
+    @objc dynamic var siteID = -1
     @objc dynamic var siteName = ""
     @objc dynamic var siteAddress = ""
     @objc dynamic var siteLogin = ""
     @objc dynamic var sitePassword = ""
+    @objc dynamic var siteImageView: Data?
+    
+    override static func primaryKey() -> String? {
+        return "siteID"
+    }
     
 }

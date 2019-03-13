@@ -1,6 +1,58 @@
 import UIKit
 
+extension UIImage {
+    static func localImage(_ name: String, template: Bool = false) -> UIImage {
+        var image = UIImage(named: name)!
+        if template {
+            image = image.withRenderingMode(.alwaysTemplate)
+        }
+        return image
+    }
+}
+
 extension UIViewController {
+    
+    func addChildViewControllerWithView(_ childViewController: UIViewController, toView view: UIView? = nil) {
+        let view: UIView = view ?? self.view
+        
+        childViewController.removeFromParent()
+        childViewController.willMove(toParent: self)
+        addChild(childViewController)
+        childViewController.didMove(toParent: self)
+        view.addSubview(childViewController.view)
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+    
+    func removeChildViewController(_ childViewController: UIViewController) {
+        childViewController.removeFromParent()
+        childViewController.willMove(toParent: nil)
+        childViewController.removeFromParent()
+        childViewController.didMove(toParent: nil)
+        childViewController.view.removeFromSuperview()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func alert(title: String, message: String, options: String..., completion: @escaping (Int) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        for (index, option) in options.enumerated() {
+            alertController.addAction(UIAlertAction.init(title: option, style: .default, handler: { (action) in
+                completion(index)
+            }))
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func fadeInAnimationsNavigationController() {
         let transition = CATransition()
@@ -9,18 +61,6 @@ extension UIViewController {
         transition.type = CATransitionType.fade
         transition.subtype = CATransitionSubtype.fromLeft
         navigationController?.view.layer.add(transition, forKey: kCATransition)
-    }
-    
-    func copyTextInLabel(your label: UILabel) {
-        
-        let alertController = UIAlertController(title: "Cкопировано", message: nil, preferredStyle: .alert)
-        self.present(alertController, animated: true, completion: nil)
-        let when = DispatchTime.now() + 0.5
-        DispatchQueue.main.asyncAfter(deadline: when){
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        let pasteboard = UIPasteboard.general
-        pasteboard.string = label.text
     }
     
     func copyTextInTextField(your textField: UITextField) {

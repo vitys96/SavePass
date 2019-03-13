@@ -75,10 +75,11 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "NewSiteTableVC") as? NewSiteTableVC else { return }
         let sortedIndexPathRow = sorted[indexPath.row]
         
+        vc.selectedSite = nil
         guard let sortedSiteImageName = sortedIndexPathRow.image else { return }
         vc.imageViewString = sortedSiteImageName
-        vc.nameOfSiteString = sortedIndexPathRow.name ?? "nil"
-        vc.siteAddressString = sortedIndexPathRow.address ?? "nil"
+        vc.nameOfSiteString = sortedIndexPathRow.name ?? ""
+        vc.siteAddressString = sortedIndexPathRow.address ?? ""
         
         
         
