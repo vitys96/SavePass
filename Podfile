@@ -10,5 +10,6 @@ pod 'SPStorkController'
 pod 'SparrowKit'
 pod 'AppLocker'
 pod 'RealmSwift'
+pod 'InfiniteLayout'
 
 end

@@ -3,18 +3,20 @@ import SPStorkController
 import RealmSwift
 import LocalAuthentication
 import AppLocker
+import InfiniteLayout
 
 class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-    
+   
+    var searchController: UISearchController!
     let cellId = "cell"
+    var filterResultArray: [SiteList] = []
     
     let realm = try! Realm()
-//    var items: Results<SiteList>! {
-//        get {
-//            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
-//        }
-//    }
+    var items: Results<SiteList>! {
+        get {
+            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
+        }
+    }
     var selectedSite: SiteList!
     
     @IBAction func addNewsite(_ sender: Any) {
@@ -32,6 +34,8 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
+        
         let userDefaults = UserDefaults.standard
         let wasWatched = userDefaults.bool(forKey: "wasWatched")
         guard !wasWatched else { return }
@@ -39,6 +43,8 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createSearchController()
         
         //        AppLocker.present(with: .validate)
         
@@ -51,94 +57,131 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         //
         //                AppLocker.present(with: .validate, and: appearance)
         
-        
         collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
-        
-        //        navigationItem.title = "Teams"
-        //        navigationController?.navigationBar.barTintColor = UIColor.customRedColor
-        //
-        //        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-        //                                                                   NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
         
         collectionView?.register(SitesCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
     }
+
     
     
     // MARK: - Table View data source
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filterResultArray.count
+        }
             return DBManager.sharedInstance.getDataFromSiteList().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SitesCollectionViewCell
         
-        //        let index = Int(indexPath.item)
-        let item = DBManager.sharedInstance.getDataFromSiteList()[indexPath.row] as SiteList
-        
-        //        let item = items[indexPath.row]
-        
-        cell.loginLabel.text = item.siteLogin
-        if let image = UIImage(data: item.siteImageView!) {
-            cell.siteImageView.image = image
-        }
+        configureCell(cell: cell, indexPath: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width / 3) - 16, height: 90)
+        return CGSize(width: (view.frame.width / 3) - 16, height: 85)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
     
-    
     // MARK: - Table View delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+//        let index = indexPath.item
+        searchController.searchBar.resignFirstResponder()
         
-        let index = indexPath.item
-        
-        let site = DBManager.sharedInstance.getDataFromSiteList()[index] as SiteList
+        let site = siteToDisplayAt(indexPath: indexPath)
         
         let modal = ModalVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.customHeight = 400
+
         modal.transitioningDelegate = transitionDelegate
+        modal.modalPresentationStyle = .custom
+        
         modal.delegate = self
         modal.selectedSite = site
-        
-        modal.loginLabel = site.siteLogin
-        modal.passwordLabel = site.sitePassword
         modal.navBar.titleLabel.text = site.siteName
         
-        modal.modalPresentationStyle = .custom
-        present(modal, completion: nil)
+        present(modal, animated: true, completion: nil)
         
         self.selectedSite = site
-        print (selectedSite)
-        
-        
     }
     
+    
+    // MARK: - MY FUNCTIONS
+    
+    private func createSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.delegate = self
+
+        self.definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = true
+        
+        searchController.searchBar.placeholder = "Искать в Save Pass"
+        searchController.searchBar.sizeToFit()
+    
+        self.navigationItem.searchController = searchController
+    }
+
+    
+    private func configureCell(cell: SitesCollectionViewCell, indexPath: IndexPath) {
+        let item = siteToDisplayAt(indexPath: indexPath)
+        cell.loginLabel.text = item.siteLogin
+        if let image = UIImage(data: item.siteImageView!) {
+            cell.siteImageView.image = image
+        }
+    }
+    
+    func filterContentFor(searchText text: String)
+    {
+        let all = Array(realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true))
+        
+        filterResultArray = all.filter{ (item) -> Bool in
+            return (item.siteName.lowercased().contains(text.lowercased()))
+            
+        }
+    }
+    
+    func siteToDisplayAt(indexPath: IndexPath) -> SiteList {
+        let site: SiteList
+        if searchController.isActive && searchController.searchBar.text != "" {
+            site = filterResultArray[indexPath.item]
+        }
+        else {
+            site = DBManager.sharedInstance.getDataFromSiteList()[indexPath.item] as SiteList
+        }
+        return site
+    }
 }
 
 // MARK: - EXTENSIONS
 
 extension SitesCollectionVC: ModalVCDelegate {
     func didChangeInfo() {
+
+        self.searchController.isActive = false
         self.dismiss(animated: true) { [weak self] in
             
+            self?.searchController.searchBar.text = nil
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "NewSiteTableVC") as! NewSiteTableVC
             vc.isDeletedVisible = true
             guard let selectedSite = self?.selectedSite else { return }
             vc.selectedSite = selectedSite
             
+//            self!.fadeInAnimationsNavigationController()
             self?.navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
     
@@ -148,6 +191,56 @@ extension SitesCollectionVC: ModalVCDelegate {
         }
     }
 }
+
+extension SitesCollectionVC: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+    }
+    
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchController.searchBar.endEditing(true)
+    }
+}
+
+extension SitesCollectionVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentFor(searchText: searchController.searchBar.text!)
+        collectionView.reloadData()
+    }
+    
+}
+
+//extension SitesCollectionVC: UISearchResultsUpdating {
+//
+//    func updateSearchResults(for searchController: UISearchController) {
+//        collectionView.reloadData()
+//    }
+//}
+//
+//extension SitesCollectionVC: UISearchBarDelegate {
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        if(!(searchBar.text?.isEmpty)!){
+//            //reload your data source if necessary
+//            self.collectionView?.reloadData()
+//        }
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if(searchText.isEmpty){
+//            //reload your data source if necessary
+//            self.collectionView?.reloadData()
+//        }
+//    }
+//}
 
 //extension SitesCollectionVC {
 //
