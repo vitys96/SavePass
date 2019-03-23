@@ -31,6 +31,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Ewa-ul-VdZ">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="key" id="JD5-Wm-wHp">
+                            <connections>
+                                <action selector="changePassword:" destination="czX-8x-LSO" id="0DE-VU-IFs"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Добавить" id="jvv-HH-ptn">
                             <connections>
                                 <action selector="addNewsite:" destination="czX-8x-LSO" id="Jjj-rT-9cy"/>
@@ -435,10 +440,85 @@
             </objects>
             <point key="canvasLocation" x="1836" y="197"/>
         </scene>
+        <!--PageVC-->
+        <scene sceneID="uVh-TU-VFo">
+            <objects>
+                <pageViewController storyboardIdentifier="pageVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="vD0-XF-iAe" customClass="PageVC" customModule="SavePass" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bNl-fm-6To" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-647" y="-536"/>
+        </scene>
+        <!--ContentVC-->
+        <scene sceneID="DrK-x7-E6H">
+            <objects>
+                <viewController storyboardIdentifier="ContentVC" id="cfs-CB-d6R" customClass="ContentVC" customModule="SavePass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MaF-Qq-v9l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Fmt-GA-7wB">
+                                <rect key="frame" x="168" y="630" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qyb-ei-c6k">
+                                <rect key="frame" x="137.5" y="164" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="8k1-AB-l7x"/>
+                                    <constraint firstAttribute="width" secondItem="qyb-ei-c6k" secondAttribute="height" multiplier="1:1" id="At3-r9-gje"/>
+                                    <constraint firstAttribute="width" constant="100" id="ca0-yt-V5u"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создайте свой список любимых ресторанов" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1z-A7-Xgu" userLabel="description">
+                                <rect key="frame" x="37.5" y="323.5" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="VlV-qo-dhG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56r-e9-7eS">
+                                <rect key="frame" x="147" y="413.5" width="81" height="35"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <state key="normal" title="Открыть"/>
+                                <connections>
+                                    <action selector="pageBtnAction:" destination="cfs-CB-d6R" eventType="touchUpInside" id="ewv-Oo-DGM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="HHh-Fh-OGa"/>
+                            <constraint firstItem="Fmt-GA-7wB" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="IJ5-bl-6aX"/>
+                            <constraint firstItem="56r-e9-7eS" firstAttribute="top" secondItem="a1z-A7-Xgu" secondAttribute="bottom" constant="50" id="PBw-gp-iew"/>
+                            <constraint firstItem="1mr-kg-rkf" firstAttribute="bottom" secondItem="Fmt-GA-7wB" secondAttribute="bottom" id="Va0-oj-ra4"/>
+                            <constraint firstItem="56r-e9-7eS" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="ljV-BW-OfG"/>
+                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="top" secondItem="qyb-ei-c6k" secondAttribute="bottom" constant="59.5" id="otB-T7-mdr"/>
+                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerY" secondItem="1mr-kg-rkf" secondAttribute="centerY" id="yve-0v-GRU"/>
+                            <constraint firstItem="qyb-ei-c6k" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="zPL-9Y-gpE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1mr-kg-rkf"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="qyb-ei-c6k" id="saE-S6-UP4"/>
+                        <outlet property="label" destination="a1z-A7-Xgu" id="jIc-tG-luB"/>
+                        <outlet property="pageButton" destination="56r-e9-7eS" id="VRI-aE-Jns"/>
+                        <outlet property="pageControl" destination="Fmt-GA-7wB" id="H1Q-26-eN6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IYM-NH-Snd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.6" y="-537.48125937031489"/>
+        </scene>
     </scenes>
     <resources>
         <image name="copyImage" width="30" height="30"/>
         <image name="instagram" width="512" height="512"/>
+        <image name="key" width="30" height="30"/>
         <image name="visible" width="30" height="30"/>
     </resources>
 </document>

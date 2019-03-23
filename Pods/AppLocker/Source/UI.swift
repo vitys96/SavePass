@@ -21,7 +21,7 @@ protocol Roundable {
 extension Roundable where Self: UIView {
     func round() {
         guard self.accessibilityHint == kRoundKey else {return}
-        layer.cornerRadius = frame.height/2
+        layer.cornerRadius = frame.height / 4
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
     }
@@ -41,7 +41,7 @@ extension UIView {
         let shakeAnimation = "shake"
         let duration = 0.6
         let animation = CAKeyframeAnimation(keyPath: animationKeyPath)
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = duration
         animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0]
         animation.delegate = delegate

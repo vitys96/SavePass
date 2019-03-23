@@ -1,5 +1,6 @@
 
 import UIKit
+import LocalAuthentication
 
 class SitesCollectionViewCell: UICollectionViewCell {
     

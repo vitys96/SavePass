@@ -6,18 +6,44 @@ import AppLocker
 import InfiniteLayout
 
 class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-   
+    
     var searchController: UISearchController!
     let cellId = "cell"
     var filterResultArray: [SiteList] = []
     
+    var alert: UIAlertController!
+    
+    lazy var emptySitesButton = UIButton()
+    let emptySitesLabel = UILabel()
+    
     let realm = try! Realm()
-    var items: Results<SiteList>! {
-        get {
-            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
+    //    var items: Results<SiteList>! {
+    //        get {
+    //            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
+    //        }
+    //    }
+    var selectedSite: SiteList!
+    
+    @IBAction func changePassword(_ sender: UIBarButtonItem) {
+        
+        alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let changePasswd = UIAlertAction(title: "Изменить пароль", style: .default) { (success) in
+            self.pin(.change)
+        }
+        let defaultAction = UIAlertAction(title: "Отмена", style: .default, handler: nil)
+        alert.addAction(changePasswd)
+        alert.addAction(defaultAction)
+        
+        present(alert, animated: true) {
+            self.alert.view.superview?.subviews.first?.isUserInteractionEnabled = true
+            self.alert.view.superview?.subviews.first?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController)))
         }
     }
-    var selectedSite: SiteList!
+    
+    @objc func dismissAlertController(){
+        self.alert.dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func addNewsite(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,40 +55,58 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
+        
+        checkCountOfSite()
+        let userDefaults = UserDefaults.standard
+        guard !userDefaults.bool(forKey: "wasWatched") else { return }
+        if let pageVC = storyboard?.instantiateViewController(withIdentifier: "pageVC") as? PageVC {
+            present(pageVC, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        
-        let userDefaults = UserDefaults.standard
-        let wasWatched = userDefaults.bool(forKey: "wasWatched")
-        guard !wasWatched else { return }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureStartScreen()
         createSearchController()
-        
-        //        AppLocker.present(with: .validate)
-        
-        //                var appearance = ALAppearance()
-        //                appearance.image = UIImage(named: "Image")!
-        //                appearance.title = "Devios Ryasnoy"
-        //                appearance.isSensorsEnabled = true
-        //                appearance.color = UIColor(hexValue: "#4f4d4d", alpha: 1.0)
+//                entryAppCheck()
+        //                AppLocker.present(with: .validate)
         //
-        //
-        //                AppLocker.present(with: .validate, and: appearance)
         
-        collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
-        
-        collectionView?.register(SitesCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
     }
-
+    
+    private func entryAppCheck() {
+        
+        var appearance = ALAppearance()
+        guard let image = UIImage(named: "shieldy") else { return }
+        appearance.image = image
+        appearance.title = "Save Pass"
+        appearance.isSensorsEnabled = true
+        
+        let userDefaults = UserDefaults.standard
+        
+        if !userDefaults.bool(forKey: "passwordCreate") {
+            AppLocker.present(with: .create, and: appearance)
+            userDefaults.set(true, forKey: "passwordCreate")
+        }
+        else {
+            AppLocker.present(with: .validate, and: appearance)
+        }
+    }
+    
+    private func pin(_ mode: ALMode) {
+        var appearance = ALAppearance()
+        guard let image = UIImage(named: "shieldy") else { return }
+        appearance.image = image
+        appearance.title = "Save Pass"
+        AppLocker.present(with: mode, and: appearance)
+    }
+    
     
     
     // MARK: - Table View data source
@@ -71,7 +115,7 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         if searchController.isActive && searchController.searchBar.text != "" {
             return filterResultArray.count
         }
-            return DBManager.sharedInstance.getDataFromSiteList().count
+        return DBManager.sharedInstance.getDataFromSiteList().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,8 +136,8 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     // MARK: - Table View delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-//        let index = indexPath.item
+        
+        //        let index = indexPath.item
         searchController.searchBar.resignFirstResponder()
         
         let site = siteToDisplayAt(indexPath: indexPath)
@@ -101,7 +145,7 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         let modal = ModalVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.customHeight = 400
-
+        
         modal.transitioningDelegate = transitionDelegate
         modal.modalPresentationStyle = .custom
         
@@ -117,11 +161,45 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     // MARK: - MY FUNCTIONS
     
+    private func configureStartScreen() {
+        collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
+        collectionView?.register(SitesCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+    }
+    private func checkCountOfSite() {
+        if DBManager.sharedInstance.getDataFromSiteList().count == 0 {
+            addingNewSiteButton()
+        }
+        else {
+            hideNewSiteButton()
+        }
+    }
+    
+    private func addingNewSiteButton() {
+        emptySitesButton.setBackgroundImage(UIImage(named: "plus"), for: .normal)
+        self.view.addSubview(emptySitesButton)
+        emptySitesButton.addTarget(self, action: #selector(pushToAddSite), for: .touchUpInside)
+        
+        emptySitesButton.frame = CGRect(x: 0, y: UIScreen.main.bounds.height / 3, width: 50, height: 50)
+        emptySitesButton.center.x = self.view.center.x
+    }
+    
+    @objc private func pushToAddSite() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyBoard.instantiateViewController(withIdentifier: "PreAddNewSiteCollectionVC") as? PreAddNewSiteCollectionVC else { return }
+        
+        fadeInAnimationsNavigationController()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    private func hideNewSiteButton() {
+        emptySitesButton.removeFromSuperview()
+    }
+    
     private func createSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.delegate = self
-
+        
         self.definesPresentationContext = true
         navigationItem.hidesSearchBarWhenScrolling = false
         self.searchController.dimsBackgroundDuringPresentation = false
@@ -129,10 +207,10 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         
         searchController.searchBar.placeholder = "Искать в Save Pass"
         searchController.searchBar.sizeToFit()
-    
+        
         self.navigationItem.searchController = searchController
     }
-
+    
     
     private func configureCell(cell: SitesCollectionViewCell, indexPath: IndexPath) {
         let item = siteToDisplayAt(indexPath: indexPath)
@@ -144,9 +222,10 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     func filterContentFor(searchText text: String)
     {
-        let all = Array(realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true))
+        let aka = DBManager.sharedInstance.getDataFromSiteList().sorted(byKeyPath: "siteName", ascending: true)
+        //        let all = Array(realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true))
         
-        filterResultArray = all.filter{ (item) -> Bool in
+        filterResultArray = aka.filter{ (item) -> Bool in
             return (item.siteName.lowercased().contains(text.lowercased()))
             
         }
@@ -168,7 +247,7 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
 
 extension SitesCollectionVC: ModalVCDelegate {
     func didChangeInfo() {
-
+        
         self.searchController.isActive = false
         self.dismiss(animated: true) { [weak self] in
             
@@ -179,7 +258,7 @@ extension SitesCollectionVC: ModalVCDelegate {
             guard let selectedSite = self?.selectedSite else { return }
             vc.selectedSite = selectedSite
             
-//            self!.fadeInAnimationsNavigationController()
+            //            self!.fadeInAnimationsNavigationController()
             self?.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -197,10 +276,10 @@ extension SitesCollectionVC: UISearchBarDelegate {
         
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-
+        
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
+        
     }
     
     

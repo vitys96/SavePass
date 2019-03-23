@@ -2,10 +2,10 @@ PODS:
   - AppLocker (2.0):
     - Valet
   - CocoaProxy (0.1.1)
-  - InfiniteLayout (0.2.3.4):
+  - InfiniteLayout (0.3):
     - CocoaProxy (~> 0)
-    - InfiniteLayout/Core (= 0.2.3.4)
-  - InfiniteLayout/Core (0.2.3.4):
+    - InfiniteLayout/Core (= 0.3)
+  - InfiniteLayout/Core (0.3):
     - CocoaProxy (~> 0)
   - Realm (3.13.1):
     - Realm/Headers (= 3.13.1)
@@ -13,7 +13,7 @@ PODS:
   - RealmSwift (3.13.1):
     - Realm (= 3.13.1)
   - SparrowKit (1.5.3)
-  - SPStorkController (1.5.2)
+  - SPStorkController (1.5.4)
   - Valet (3.2.3)
 
 DEPENDENCIES:
@@ -37,11 +37,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppLocker: ad734b8027d26ae5cbb4a70eed2bed30159c3b71
   CocoaProxy: 35ab81e24325b33834cffe45a3d1fd48ca67ef3a
-  InfiniteLayout: 0a2d22c0d7c12051468b1bd1763875285f2e6815
+  InfiniteLayout: 24d5e5ea1528bb86ee00a4e3c02f93fdb38e3f68
   Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
   RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
   SparrowKit: 8a2991c81d6ab3038d4a41a98a1a73ea17d1a977
-  SPStorkController: e318aa012951b535380a5aa277405ef1bd09b75e
+  SPStorkController: 6c34a0375ef1254299e460784886ff4e929b82ed
   Valet: 4af0382d4a94db5c7861504f751884f653437d24
 
 PODFILE CHECKSUM: 3536f65dcf5f1e7cd6ea7e2706348a70ebd4d14e

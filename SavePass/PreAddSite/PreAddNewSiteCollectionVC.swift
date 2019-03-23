@@ -52,8 +52,18 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PreAddNSCollectionViewCell
+        if indexPath.item == 0 {
+            let layer = cell.layer
+            layer.shadowOffset = CGSize(width: 0, height: 0)
+            layer.shadowRadius = 3
+            layer.shadowColor = UIColor.red.cgColor
+            layer.shadowOpacity = 1
+            layer.frame = cell.frame
+            cell.teamNameLabel.textColor = .black
+        }
         
         cell.site = sorted[indexPath.item]
+        
         return cell
     }
     

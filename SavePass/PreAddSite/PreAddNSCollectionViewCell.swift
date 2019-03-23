@@ -10,7 +10,7 @@ import UIKit
 
 class PreAddNSCollectionViewCell: UICollectionViewCell {
     
-    var site: Team? {
+    var site: SiteObject? {
         didSet {
             guard let teamImage = site?.image else { return }
             guard let teamName = site?.name else { return }
