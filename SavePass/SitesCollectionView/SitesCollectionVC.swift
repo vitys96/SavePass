@@ -5,39 +5,53 @@ import LocalAuthentication
 import AppLocker
 import InfiniteLayout
 
-class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SitesCollectionVC: UICollectionViewController {
     
     var searchController: UISearchController!
     let cellId = "cell"
     var filterResultArray: [SiteList] = []
-    
     var alert: UIAlertController!
-    
     lazy var emptySitesButton = UIButton()
     let emptySitesLabel = UILabel()
-    
+    let userDefaults = UserDefaults.standard
     let realm = try! Realm()
-    //    var items: Results<SiteList>! {
-    //        get {
-    //            return realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true)
-    //        }
-    //    }
+    
     var selectedSite: SiteList!
     
     @IBAction func changePassword(_ sender: UIBarButtonItem) {
         
         alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let changePasswd = UIAlertAction(title: "Изменить пароль", style: .default) { (success) in
-            self.pin(.change)
+        
+        if userDefaults.bool(forKey: "passwordCreate") && !userDefaults.bool(forKey: "passwordDelete") {
+            alertActions(title: "Изменить пароль", style: .default) { (success) in
+                self.pin(.change)
+                
+            }
+            alertActions(title: "Удалить пароль", style: .destructive) { (success) in
+                self.pin(.deactive)
+                self.userDefaults.set(true, forKey: "passwordDelete")
+            }
         }
+        if userDefaults.bool(forKey: "passwordDelete") {
+            alertActions(title: "Создать пароль", style: .default) { (success) in
+                self.pin(.create)
+                self.userDefaults.set(false, forKey: "passwordDelete")
+                
+            }
+        }
+        
         let defaultAction = UIAlertAction(title: "Отмена", style: .default, handler: nil)
-        alert.addAction(changePasswd)
         alert.addAction(defaultAction)
         
         present(alert, animated: true) {
-            self.alert.view.superview?.subviews.first?.isUserInteractionEnabled = true
-            self.alert.view.superview?.subviews.first?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController)))
+            self.alert.view.superview?.subviews[1].isUserInteractionEnabled = true
+            self.alert.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController)))
         }
+    }
+    
+    func alertActions(title: String, style: UIAlertAction.Style, hadler: ((UIAlertAction) -> Void)? = nil) {
+        let action = UIAlertAction(title: title, style: style, handler: hadler)
+        alert.addAction(action)
     }
     
     @objc func dismissAlertController(){
@@ -55,47 +69,33 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
-        
         checkCountOfSite()
-        let userDefaults = UserDefaults.standard
         guard !userDefaults.bool(forKey: "wasWatched") else { return }
         if let pageVC = storyboard?.instantiateViewController(withIdentifier: "pageVC") as? PageVC {
             present(pageVC, animated: true, completion: nil)
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        entryAppCheck()
         configureStartScreen()
-        createSearchController()
-//                entryAppCheck()
-        //                AppLocker.present(with: .validate)
-        //
-        
-        
+        createSearchController() 
     }
     
     private func entryAppCheck() {
         
-        var appearance = ALAppearance()
-        guard let image = UIImage(named: "shieldy") else { return }
-        appearance.image = image
-        appearance.title = "Save Pass"
-        appearance.isSensorsEnabled = true
-        
-        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "passwordDelete") {
+            return
+        }
         
         if !userDefaults.bool(forKey: "passwordCreate") {
-            AppLocker.present(with: .create, and: appearance)
+            pin(.create)
             userDefaults.set(true, forKey: "passwordCreate")
         }
         else {
-            AppLocker.present(with: .validate, and: appearance)
+            pin(.validate)
         }
     }
     
@@ -103,7 +103,9 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         var appearance = ALAppearance()
         guard let image = UIImage(named: "shieldy") else { return }
         appearance.image = image
-        appearance.title = "Save Pass"
+        
+        appearance.color = UIColor(hexValue: "#636363", alpha: 1.0)
+        appearance.isSensorsEnabled = true
         AppLocker.present(with: mode, and: appearance)
     }
     
@@ -120,19 +122,13 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SitesCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SitesCollectionViewCell
         
-        configureCell(cell: cell, indexPath: indexPath)
-        return cell
+        configureCell(cell: cell!, indexPath: indexPath)
+        return cell!
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width / 3) - 16, height: 85)
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-    }
     
     // MARK: - Table View delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -151,7 +147,8 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         
         modal.delegate = self
         modal.selectedSite = site
-        modal.navBar.titleLabel.text = site.siteName
+        //        modal.navBar.titleLabel.text = site.siteName
+        modal.titleLabel = site.siteName
         
         present(modal, animated: true, completion: nil)
         
@@ -220,18 +217,16 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
         }
     }
     
-    func filterContentFor(searchText text: String)
+    private func filterContentFor(searchText text: String)
     {
-        let aka = DBManager.sharedInstance.getDataFromSiteList().sorted(byKeyPath: "siteName", ascending: true)
-        //        let all = Array(realm.objects(SiteList.self).sorted(byKeyPath: "siteName", ascending: true))
-        
-        filterResultArray = aka.filter{ (item) -> Bool in
+        let sortedBySiteName = DBManager.sharedInstance.getDataFromSiteList().sorted(byKeyPath: "siteName", ascending: true)
+        filterResultArray = sortedBySiteName.filter{ (item) -> Bool in
             return (item.siteName.lowercased().contains(text.lowercased()))
             
         }
     }
     
-    func siteToDisplayAt(indexPath: IndexPath) -> SiteList {
+    private func siteToDisplayAt(indexPath: IndexPath) -> SiteList {
         let site: SiteList
         if searchController.isActive && searchController.searchBar.text != "" {
             site = filterResultArray[indexPath.item]
@@ -245,6 +240,16 @@ class SitesCollectionVC: UICollectionViewController, UICollectionViewDelegateFlo
 
 // MARK: - EXTENSIONS
 
+extension SitesCollectionVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (view.frame.width / 3) - 16, height: 85)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+}
+
 extension SitesCollectionVC: ModalVCDelegate {
     func didChangeInfo() {
         
@@ -257,8 +262,6 @@ extension SitesCollectionVC: ModalVCDelegate {
             vc.isDeletedVisible = true
             guard let selectedSite = self?.selectedSite else { return }
             vc.selectedSite = selectedSite
-            
-            //            self!.fadeInAnimationsNavigationController()
             self?.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -281,9 +284,6 @@ extension SitesCollectionVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
     }
-    
-    
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchController.searchBar.endEditing(true)
     }
@@ -296,143 +296,6 @@ extension SitesCollectionVC: UISearchResultsUpdating {
     }
     
 }
-
-//extension SitesCollectionVC: UISearchResultsUpdating {
-//
-//    func updateSearchResults(for searchController: UISearchController) {
-//        collectionView.reloadData()
-//    }
-//}
-//
-//extension SitesCollectionVC: UISearchBarDelegate {
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        if(!(searchBar.text?.isEmpty)!){
-//            //reload your data source if necessary
-//            self.collectionView?.reloadData()
-//        }
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if(searchText.isEmpty){
-//            //reload your data source if necessary
-//            self.collectionView?.reloadData()
-//        }
-//    }
-//}
-
-//extension SitesCollectionVC {
-//
-//    func authenticationWithTouchID() {
-//
-//        let localAuthenticationContext = LAContext()
-//        localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
-//
-//        var authError: NSError?
-//        let reasonString = "To access the secure data"
-//
-//        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-//
-//            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { success, evaluateError in
-//
-//                if success {
-//
-//                    //TODO: User authenticated successfully, take appropriate action
-//
-//                } else {
-//                    //TODO: User did not authenticate successfully, look at error and take appropriate action
-//                    guard let error = evaluateError else {
-//                        return
-//                    }
-//
-//                    print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-//
-//                    //TODO: If you have choosen the 'Fallback authentication mechanism selected' (LAError.userFallback). Handle gracefully
-//
-//                }
-//            }
-//        } else {
-//
-//            guard let error = authError else {
-//                return
-//            }
-//            //TODO: Show appropriate alert if biometry/TouchID/FaceID is lockout or not enrolled
-//            print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
-//        }
-//    }
-//
-//    func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
-//        var message = ""
-//        if #available(iOS 11.0, macOS 10.13, *) {
-//            switch errorCode {
-//            case LAError.biometryNotAvailable.rawValue:
-//                message = "Authentication could not start because the device does not support biometric authentication."
-//
-//            case LAError.biometryLockout.rawValue:
-//                message = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times."
-//
-//            case LAError.biometryNotEnrolled.rawValue:
-//                message = "Authentication could not start because the user has not enrolled in biometric authentication."
-//
-//            default:
-//                message = "Did not find error code on LAError object"
-//            }
-//        } else {
-//            switch errorCode {
-//            case LAError.touchIDLockout.rawValue:
-//                message = "Too many failed attempts."
-//
-//            case LAError.touchIDNotAvailable.rawValue:
-//                message = "TouchID is not available on the device"
-//
-//            case LAError.touchIDNotEnrolled.rawValue:
-//                message = "TouchID is not enrolled on the device"
-//
-//            default:
-//                message = "Did not find error code on LAError object"
-//            }
-//        }
-//
-//        return message
-//    }
-//
-//    func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
-//
-//        var message = ""
-//
-//        switch errorCode {
-//
-//        case LAError.authenticationFailed.rawValue:
-//            message = "The user failed to provide valid credentials"
-//
-//        case LAError.appCancel.rawValue:
-//            message = "Authentication was cancelled by application"
-//
-//        case LAError.invalidContext.rawValue:
-//            message = "The context is invalid"
-//
-//        case LAError.notInteractive.rawValue:
-//            message = "Not interactive"
-//
-//        case LAError.passcodeNotSet.rawValue:
-//            message = "Passcode is not set on the device"
-//
-//        case LAError.systemCancel.rawValue:
-//            message = "Authentication was cancelled by the system"
-//
-//        case LAError.userCancel.rawValue:
-//            message = "The user did cancel"
-//
-//        case LAError.userFallback.rawValue:
-//            message = "The user chose to use the fallback"
-//
-//        default:
-//            message = evaluatePolicyFailErrorMessageForLA(errorCode: errorCode)
-//        }
-//
-//        return message
-//}
-//}
 
 
 

@@ -18,21 +18,37 @@ class DBManager {
     }
     
     func addDataSiteList(object: SiteList) {
-        
-        try! database.write {
-            database.add(object, update: true)
+        do {
+            try database.write {
+                database.add(object, update: true)
+            }
+        }
+        catch {
+            print ("error additing data to site list")
         }
     }
     
     func deleteAllDatabase()  {
-        try! database.write {
-            database.deleteAll()
+        
+        do {
+            try database.write {
+                database.deleteAll()
+            }
+        }
+        catch {
+            print ("error to delete all database")
         }
     }
     
     func deleteFromDb(object: SiteList) {
-        try! database.write {
-            database.delete(object)
+        
+        do {
+            try database.write {
+                database.delete(object)
+            }
+        }
+        catch {
+            print ("error to delete site from database")
         }
     }
     

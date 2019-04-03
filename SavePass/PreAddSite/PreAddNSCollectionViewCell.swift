@@ -12,9 +12,7 @@ class PreAddNSCollectionViewCell: UICollectionViewCell {
     
     var site: SiteObject? {
         didSet {
-            guard let teamImage = site?.image else { return }
-            guard let teamName = site?.name else { return }
-            
+            guard let teamImage = site?.image, let teamName = site?.name else { return }
             teamImageVieW.image = UIImage(named: teamImage)
             teamNameLabel.text = teamName
         }
@@ -26,14 +24,15 @@ class PreAddNSCollectionViewCell: UICollectionViewCell {
         setCellShadow()
     }
     
+    
     func setup() {
-        
         self.backgroundColor = UIColor.white
+        
         
         self.addSubview(teamImageVieW)
         self.addSubview(teamNameLabel)
         
-        teamImageVieW.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 50)
+        teamImageVieW.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
         teamNameLabel.anchor(top: teamImageVieW.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
     }
     
@@ -45,7 +44,6 @@ class PreAddNSCollectionViewCell: UICollectionViewCell {
     
     let teamNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
         label.textColor = UIColor.gray
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .center

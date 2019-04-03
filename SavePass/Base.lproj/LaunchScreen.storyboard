@@ -26,23 +26,11 @@
                                     <constraint firstAttribute="width" constant="150" id="lMR-WV-gAC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Pass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWe-HA-Uzp">
-                                <rect key="frame" x="102" y="426" width="171" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="171" id="eVy-2n-wo8"/>
-                                    <constraint firstAttribute="width" secondItem="mWe-HA-Uzp" secondAttribute="height" multiplier="171:46" id="tSL-Iw-2Dy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lIZ-J6-mKH" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="8ua-tv-8Eg"/>
-                            <constraint firstItem="mWe-HA-Uzp" firstAttribute="top" secondItem="lIZ-J6-mKH" secondAttribute="bottom" constant="7.5" id="A6Y-ba-Odh"/>
                             <constraint firstItem="lIZ-J6-mKH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="NYL-iz-3kh"/>
-                            <constraint firstItem="mWe-HA-Uzp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zGR-h2-RyA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -9,7 +9,6 @@
 
 import UIKit
 import RealmSwift
-import InfiniteLayout
 
 class NewSiteTableVC: UITableViewController {
     
@@ -18,21 +17,18 @@ class NewSiteTableVC: UITableViewController {
     var selectedSite: SiteList?
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     @IBOutlet weak var siteImageView: UIImageView!
-    
     @IBOutlet weak var siteName: UITextField!
-    
     @IBOutlet weak var siteAddress: UITextField!
-    
     @IBOutlet weak var siteLogin: UITextField!
-    
     @IBOutlet weak var sitePassword: UITextField!
     
     @IBOutlet weak var copySiteLoginOutlet: UIButton!
     @IBOutlet weak var copySitePasswordOutlet: UIButton!
     @IBOutlet weak var showHidePassword: UIButton!
-    
     @IBOutlet weak var notesOutlet: UITextView!
+    
     var isDeletedVisible: Bool!
     var toggle = true
     var imageViewString = String()
@@ -47,11 +43,12 @@ class NewSiteTableVC: UITableViewController {
     
     @IBAction func saveBarButtonItem(_ sender: Any) {
         
-        guard let siteNameLabel = siteName.text, !siteNameLabel.isEmpty else { return }
-        guard let siteAddress = siteAddress.text, !siteAddress.isEmpty else { return }
-        guard let siteLogin = siteLogin.text, !siteLogin.isEmpty else { return }
-        guard let sitePassword = sitePassword.text, !sitePassword.isEmpty else { return }
-        guard let imageData = siteImageView.image?.pngData() else { return }
+        guard let siteNameLabel = siteName.text,
+            let siteAddress = siteAddress.text,
+            let siteLogin = siteLogin.text,
+            let sitePassword = sitePassword.text,
+            let imageData = siteImageView.image?.pngData()
+            else { return }
         
         let site = SiteList()
         
@@ -75,7 +72,7 @@ class NewSiteTableVC: UITableViewController {
     }
     
     
-    // MARK: - Action кнопкок скопировать и показать пароль
+    // MARK: - Copy/Show buttons
     
     @IBAction func LoginSiteCopyButton(_ sender: Any) {
         copyTextInTextField(your: siteLogin)
@@ -89,7 +86,7 @@ class NewSiteTableVC: UITableViewController {
         switchShowHidePasButton(showHideButton: showHidePassword, securityTextEntry: sitePassword, variable: &toggle)
     }
     
-    // MARK: - Удалить объект (сайт) из БД
+    // MARK: - Dele site from Realm
     @IBAction func DeleteSiteData(_ sender: Any) {
         
         let alertController = UIAlertController(title: "Удалить учетные данные", message: "Удаленные данные нельзя восставить.", preferredStyle: .alert)
@@ -113,16 +110,16 @@ class NewSiteTableVC: UITableViewController {
         super.viewDidLoad()
         
         configStartScreen()
-        
-        [siteName, siteAddress, siteLogin, sitePassword].forEach { (textfield) in
-            textfield?.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
-        }
     }
     
     
     
     // MARK: - Configure Start Screen
     private func configStartScreen() {
+        
+        [siteName, siteAddress, siteLogin, sitePassword].forEach { (textfield) in
+            textfield?.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
+        }
         if selectedSite == nil {
             
             siteImageView.image = UIImage(named: imageViewString)
@@ -143,6 +140,10 @@ class NewSiteTableVC: UITableViewController {
             siteImageView.image = UIImage(data: imageData)
             notesOutlet.text = selectedSite?.notes
         }
+        [siteName, siteAddress, siteLogin, sitePassword].forEach { (textField) in
+            textField?.delegate = self
+        }
+        
     }
     
     @objc private func logPasTextFieldDidChanged() {
@@ -164,9 +165,12 @@ class NewSiteTableVC: UITableViewController {
             enableCopyButton(copyButton: copySitePasswordOutlet, enabled: false)
             enableCopyButton(copyButton: showHidePassword, enabled: false)
         }
-        
-        if !login.isEmpty && !password.isEmpty {
+        guard let siteNameLabel = siteName.text else { return }
+        if !login.isEmpty && !password.isEmpty && !siteNameLabel.isEmpty {
             saveButton.isEnabled = true
+        }
+        else {
+            saveButton.isEnabled = false
         }
         
     }
@@ -185,12 +189,11 @@ class NewSiteTableVC: UITableViewController {
     
     
     
-    
-    
-    
+}
+
+extension NewSiteTableVC {
     
     // MARK: - Table View data source
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -238,7 +241,24 @@ class NewSiteTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
     }
+}
+
+extension NewSiteTableVC: UITextFieldDelegate {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case siteName:
+            siteAddress.becomeFirstResponder()
+        case siteAddress:
+            siteLogin.becomeFirstResponder()
+        case siteLogin:
+            sitePassword.becomeFirstResponder()
+        case sitePassword:
+            sitePassword.resignFirstResponder()
+        default:
+            break
+        }
+        return false
+    }
 }

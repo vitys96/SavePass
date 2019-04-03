@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -273,9 +273,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEL-KO-vKM">
-                                <rect key="frame" x="245" y="313" width="75" height="75"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Delete">
+                                <rect key="frame" x="235" y="313" width="90" height="75"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Удалить">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -303,8 +303,8 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-9Q-OSg">
                                 <rect key="frame" x="55" y="313" width="75" height="75"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Cancel">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Отмена">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -319,7 +319,7 @@
                         <constraints>
                             <constraint firstItem="UJn-a6-MYe" firstAttribute="width" secondItem="uxb-3y-6MP" secondAttribute="width" id="0Ik-lC-yc3"/>
                             <constraint firstItem="rAE-1L-zxN" firstAttribute="height" secondItem="UJn-a6-MYe" secondAttribute="height" id="19H-VD-zGk"/>
-                            <constraint firstItem="fEL-KO-vKM" firstAttribute="leading" secondItem="hQB-bP-FZg" secondAttribute="trailing" constant="20" id="1yT-f6-moA"/>
+                            <constraint firstItem="fEL-KO-vKM" firstAttribute="leading" secondItem="hQB-bP-FZg" secondAttribute="trailing" constant="10" id="1yT-f6-moA"/>
                             <constraint firstItem="UJn-a6-MYe" firstAttribute="centerX" secondItem="uxb-3y-6MP" secondAttribute="centerX" id="2FN-uq-SWi"/>
                             <constraint firstItem="hQB-bP-FZg" firstAttribute="width" secondItem="abq-s3-wbI" secondAttribute="width" id="54y-Oo-XAm"/>
                             <constraint firstItem="cog-Nd-UYd" firstAttribute="centerY" secondItem="HJZ-BT-9eb" secondAttribute="centerY" id="5Ck-sy-Zej"/>
@@ -339,7 +339,7 @@
                             <constraint firstItem="cKD-qE-N40" firstAttribute="centerX" secondItem="uve-ti-7ya" secondAttribute="centerX" id="MjW-6J-XDk"/>
                             <constraint firstItem="hQB-bP-FZg" firstAttribute="height" secondItem="abq-s3-wbI" secondAttribute="height" id="MzG-q2-48J"/>
                             <constraint firstItem="cog-Nd-UYd" firstAttribute="leading" secondItem="HJZ-BT-9eb" secondAttribute="trailing" constant="20" id="PlA-aL-v9p"/>
-                            <constraint firstItem="fEL-KO-vKM" firstAttribute="width" secondItem="hQB-bP-FZg" secondAttribute="width" id="QM2-1m-cvs"/>
+                            <constraint firstItem="fEL-KO-vKM" firstAttribute="width" secondItem="hQB-bP-FZg" secondAttribute="width" multiplier="1.2" id="QM2-1m-cvs"/>
                             <constraint firstItem="HJZ-BT-9eb" firstAttribute="leading" secondItem="uxb-3y-6MP" secondAttribute="trailing" constant="20" id="S9d-ie-sLF"/>
                             <constraint firstItem="uve-ti-7ya" firstAttribute="centerX" secondItem="cog-Nd-UYd" secondAttribute="centerX" id="Sa1-Ut-grM"/>
                             <constraint firstItem="HJZ-BT-9eb" firstAttribute="width" secondItem="xRu-9U-A1v" secondAttribute="width" multiplier="1:5" id="Sxd-y1-5GB"/>
@@ -395,6 +395,6 @@
         </viewController>
     </objects>
     <resources>
-        <image name="shieldy" width="384" height="384"/>
+        <image name="shieldy" width="240" height="240"/>
     </resources>
 </document>

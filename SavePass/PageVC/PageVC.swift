@@ -19,7 +19,6 @@ class PageVC: UIPageViewController {
     var imagesArray = ["1", "2", "3"]
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

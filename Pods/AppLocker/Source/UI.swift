@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Indicator: UIView {
+public class Indicator: UIView {
     var isNeedClear = false
 }
 

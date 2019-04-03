@@ -37,7 +37,6 @@ class ContentVC: UIViewController {
         
         self.view.addVerticalGradientLayer(topColor: UIColor(hex: "#ecf0f1"), bottomColor: UIColor(hex: "#add3e5"))
         
-        
         switch index {
         case 0: pageButton.isHidden = true
         case 1: pageButton.isHidden = true
@@ -50,10 +49,5 @@ class ContentVC: UIViewController {
         
         imageView.image = UIImage(named: imageName)
         label.text = labelText
-        
-        
     }
-    
-    
-    
 }

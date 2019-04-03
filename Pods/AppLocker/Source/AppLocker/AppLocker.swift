@@ -70,14 +70,14 @@ public class AppLocker: UIViewController {
             let mode = self.mode ?? .validate
             switch mode {
             case .create:
-                submessageLabel.text = "Create your passcode" // Your submessage for create mode
+                submessageLabel.text = "Создайте пароль" // Your submessage for create mode
                 cancelButton.isHidden = true
             case .change:
-                submessageLabel.text = "Enter your passcode" // Your submessage for change mode
+                submessageLabel.text = "Введите существующий пароль" // Your submessage for change mode
             case .deactive:
-                submessageLabel.text = "Enter your passcode" // Your submessage for deactive mode
+                submessageLabel.text = "Введите существующий пароль" // Your submessage for deactive mode
             case .validate:
-                submessageLabel.text = "Enter your passcode" // Your submessage for validate mode
+                submessageLabel.text = "Введите пароль" // Your submessage for validate mode
                 cancelButton.isHidden = true
                 isFirstCreationStep = false
             }
@@ -125,7 +125,7 @@ public class AppLocker: UIViewController {
             isFirstCreationStep = false
             reservedPin = pin
             clearView()
-            submessageLabel.text = "Confirm your pincode"
+            submessageLabel.text = "Подтвердите пароль"
         } else {
             confirmPin()
         }

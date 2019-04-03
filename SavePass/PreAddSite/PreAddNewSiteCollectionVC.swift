@@ -27,20 +27,8 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     func updateUI() {
         collectionView?.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
         collectionView?.register(PreAddNSCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        
-        
     }
-    func setUpNavBar(){
-        //For title in navigation bar
-        self.navigationController?.view.backgroundColor = UIColor.white
-        self.navigationController?.view.tintColor = UIColor.orange
-        self.navigationItem.title = "About Us"
-        
-        //For back button in navigation bar
-        let backButton = UIBarButtonItem()
-        backButton.title = "Ррараар"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
+    
     
     
     
@@ -52,7 +40,9 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PreAddNSCollectionViewCell
-        if indexPath.item == 0 {
+        
+        switch indexPath.item {
+        case 0...2:
             let layer = cell.layer
             layer.shadowOffset = CGSize(width: 0, height: 0)
             layer.shadowRadius = 3
@@ -60,8 +50,9 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
             layer.shadowOpacity = 1
             layer.frame = cell.frame
             cell.teamNameLabel.textColor = .black
+        default:
+            break
         }
-        
         cell.site = sorted[indexPath.item]
         
         return cell
@@ -90,8 +81,6 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
         vc.imageViewString = sortedSiteImageName
         vc.nameOfSiteString = sortedIndexPathRow.name ?? ""
         vc.siteAddressString = sortedIndexPathRow.address ?? ""
-        
-        
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

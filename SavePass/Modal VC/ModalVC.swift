@@ -10,7 +10,6 @@ protocol ModalVCDelegate {
 
 class ModalVC: UIViewController {
     
-    
     let realm = try! Realm()
     
     var selectedSite: SiteList?
@@ -18,6 +17,7 @@ class ModalVC: UIViewController {
     var delegate: ModalVCDelegate?
     
     var toggle = true
+    var titleLabel = String()
     
     let navBar = SPFakeBarView(style: .stork)
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -106,7 +106,7 @@ class ModalVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navBar.titleLabel.text = self.titleLabel
         self.view.backgroundColor = UIColor.white
         self.modalPresentationCapturesStatusBarAppearance = true
         
@@ -116,7 +116,6 @@ class ModalVC: UIViewController {
         
         self.navBar.rightButton.setTitle("Просмотреть", for: .normal)
         self.navBar.rightButton.addTarget(self, action: #selector(changeInfo), for: .touchUpInside)
-        
         
         [navBar, siteLoginTextField, sitePasswordTextField, loginLabelText, passwordLabelText, separator, separatorTwo, copyButton, copyButtonTwo, showPassword].forEach(view.addSubview)
         
@@ -141,9 +140,9 @@ class ModalVC: UIViewController {
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Поделиться", style: .default) { (action) in
             let items = [self]
-                
+            
             let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                self.present(activityController, animated: true)
+            self.present(activityController, animated: true)
         }
         alertController.addAction(deleteAction)
         alertController.addAction(okAction)
@@ -176,12 +175,8 @@ class ModalVC: UIViewController {
         self.separator.center.x = size.width / 2
         self.separator.center.y = size.height / 2
         
-        //        self.loginLabelText.frame = CGRect(x: 0, y: 0, width: 90, height: 30)
         self.loginLabelText.anchor(top: nil, left: siteLoginTextField.leftAnchor , bottom: siteLoginTextField.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: -10, paddingRight: 0)
         
-        //        self.siteLoginTextField.frame = CGRect(x: 0, y: 0, width: size.width / 1.5, height: 40)
-        //        self.siteLoginTextField.center.x = size.width / 2
-        //        self.siteLoginTextField.center.y = separator.center.y - 20
         self.siteLoginTextField.anchor(top: nil, left: separator.leftAnchor, bottom: separator.bottomAnchor, right: copyButton.rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 0, height: 30)
         
         self.copyButton.anchor(top: siteLoginTextField.topAnchor, left: nil, bottom: nil, right: separator.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
@@ -190,17 +185,12 @@ class ModalVC: UIViewController {
         
         
         self.sitePasswordTextField.anchor(top: passwordLabelText.topAnchor, left: separator.leftAnchor, bottom: separatorTwo.bottomAnchor, right: showPassword.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: separator.frame.width, height: 30)
-        //        self.sitePasswordTextField.center.x = size.width / 2
-        //        self.sitePasswordTextField.center.y = separator.center.y + 60
         
         self.copyButtonTwo.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: separatorTwo.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
         
         self.showPassword.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: copyButtonTwo.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 25, height: 25)
         
         self.separatorTwo.anchor(top: sitePasswordTextField.bottomAnchor, left: separator.leftAnchor, bottom: nil, right: separator.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: size.width / 1.4, height: 2)
-        //        self.separatorTwo.frame = CGRect(x: 0, y: 0, width: size.width / 1.4, height: 2)
-        //        self.separatorTwo.center.x = size.width / 2
-        //        self.separatorTwo.center.y = sitePasswordTextField.center.y + 20
     }
 }
 
@@ -210,17 +200,17 @@ extension ModalVC: UIActivityItemSource {
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-     
-        guard let siteName = selectedSite?.siteName else { return ""}
-        guard let siteLogin = selectedSite?.siteLogin else { return ""}
-        guard let sitePasswd = selectedSite?.sitePassword else { return ""}
+        
+        guard let siteName = selectedSite?.siteName,
+            let siteLogin = selectedSite?.siteLogin,
+            let sitePasswd = selectedSite?.sitePassword
+            else { return ""}
         
         return """
         \(siteName)
         \(siteLogin)
         \(sitePasswd)
         """
-
     }
 }
 

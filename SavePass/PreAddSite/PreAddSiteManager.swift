@@ -36,7 +36,9 @@ var preAddSites = [
     SiteObject(image: "ebay", name: "Ebay", address: "ebay.com"),
     SiteObject(image: "microsoft", name: "Microsoft", address: "microsoft.com"),
     SiteObject(image: "netflix", name: "Netflix", address: "netflix.com"),
-    SiteObject(image: "reddit", name: "Reddit", address: "reddit.com")
+    SiteObject(image: "reddit", name: "Reddit", address: "reddit.com"),
+    SiteObject(image: "2mail", name: "Почта", address: nil),
+    SiteObject(image: "3bank", name: "Банки", address: nil)
     
 ]
 
