@@ -20,23 +20,22 @@
 // SOFTWARE.
 
 import UIKit
-import StoreKit
 
-public struct SPApp {
+enum SPApp {
     
-    public static var udid: String? {
+    static var udid: String? {
         return UIDevice.current.identifierForVendor?.uuidString
     }
     
-    public static var displayName: String? {
+    static var displayName: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
     }
     
-    public static var rootController: UIViewController? {
+    static var rootController: UIViewController? {
         return UIApplication.shared.keyWindow?.rootViewController
     }
     
-    public static var safeArea: UIEdgeInsets {
+    static var safeArea: UIEdgeInsets {
         if #available(iOS 11.0, *) {
             return UIApplication.shared.keyWindow?.safeArea ?? UIEdgeInsets.zero
         } else {
@@ -44,7 +43,7 @@ public struct SPApp {
         }
     }
     
-    public static func set(rootController: UIViewController, animatable: Bool = true) {
+    static func set(rootController: UIViewController, animatable: Bool = true) {
         
         rootController.view.frame = UIScreen.main.bounds
         
@@ -65,12 +64,10 @@ public struct SPApp {
         }
     }
     
-    public static func set(elementsColor: UIColor) {
+    static func set(elementsColor: UIColor) {
         UINavigationController.elementsColor = elementsColor
         UIAlertController.elementsColor = elementsColor
         UITabBarController.elementsColor = elementsColor
         UITabBar.appearance().tintColor = elementsColor
     }
-    
-    private init() {}
 }

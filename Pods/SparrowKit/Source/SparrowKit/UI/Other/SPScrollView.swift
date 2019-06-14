@@ -21,14 +21,14 @@
 
 import UIKit
 
-open class SPScrollView: UIScrollView {
+class SPScrollView: UIScrollView {
     
     init() {
         super.init(frame: .zero)
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -40,7 +40,7 @@ open class SPScrollView: UIScrollView {
         self.delaysContentTouches = false
     }
     
-    override open func touchesShouldCancel(in view: UIView) -> Bool {
+    override func touchesShouldCancel(in view: UIView) -> Bool {
         if view is UIControl
             && !(view is UITextInput)
             && !(view is UISlider)

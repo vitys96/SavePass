@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPMengTransformTableViewCell: UITableViewCell {
+class SPMengTransformTableViewCell: UITableViewCell {
     
     let collectionView = SPMengTransformCollectionView()
     var collectionHeight: CGFloat = SPMengTransformCollectionView.recomendedHeight {
@@ -38,7 +38,7 @@ open class SPMengTransformTableViewCell: UITableViewCell {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }

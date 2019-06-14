@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPFormTextInputTableViewCell: SPTableViewCell {
+class SPFormTextInputTableViewCell: SPTableViewCell {
     
     let textInputView: UITextView = UITextView()
 
@@ -33,11 +33,11 @@ open class SPFormTextInputTableViewCell: SPTableViewCell {
     
     private var textInputViewHeightConstraint: NSLayoutConstraint!
     
-    override open var contentViews: [UIView] {
+    override var contentViews: [UIView] {
         return [self.textInputView]
     }
     
-    override open var accessoryType: UITableViewCell.AccessoryType {
+    override var accessoryType: UITableViewCell.AccessoryType {
         didSet {
             if self.accessoryType == .disclosureIndicator {
                 self.selectionStyle = .default
@@ -52,7 +52,7 @@ open class SPFormTextInputTableViewCell: SPTableViewCell {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -81,13 +81,13 @@ open class SPFormTextInputTableViewCell: SPTableViewCell {
         self.accessoryType = .none
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
         self.textInputView.text = ""
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         let xPosition: CGFloat = (self.imageView?.frame.bottomX ?? 0) + self.layoutMargins.left

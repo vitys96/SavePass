@@ -21,18 +21,18 @@
 
 import UIKit
 
-open class SPPromoTableViewCell: SPBaseContentTableViewCell {
+class SPPromoTableViewCell: SPBaseContentTableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.backgroundColor = UIColor.clear
         self.commonInit()

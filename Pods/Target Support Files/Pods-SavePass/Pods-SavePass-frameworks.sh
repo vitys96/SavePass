@@ -144,20 +144,18 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AppLocker/AppLocker.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CocoaProxy/CocoaProxy.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/InfiniteLayout/InfiniteLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SPFakeBar/SPFakeBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SparrowKit/SparrowKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Valet/Valet.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AppLocker/AppLocker.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CocoaProxy/CocoaProxy.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/InfiniteLayout/InfiniteLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SPFakeBar/SPFakeBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SparrowKit/SparrowKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Valet/Valet.framework"

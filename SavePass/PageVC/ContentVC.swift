@@ -35,7 +35,7 @@ class ContentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addVerticalGradientLayer(topColor: UIColor(hex: "#ecf0f1"), bottomColor: UIColor(hex: "#add3e5"))
+        self.view.addVerticalGradientLayer(topColor: UIColor(named: "#ecf0f1")!, bottomColor: UIColor(named: "#add3e5")!)
         
         switch index {
         case 0: pageButton.isHidden = true

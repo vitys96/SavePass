@@ -22,8 +22,14 @@
 		F5546D56222C4362003CE563 /* PreAddNewSiteCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D55222C4362003CE563 /* PreAddNewSiteCollectionVC.swift */; };
 		F5546D58222C4374003CE563 /* PreAddNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D57222C4374003CE563 /* PreAddNSCollectionViewCell.swift */; };
 		F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D59222C4383003CE563 /* PreAddSiteManager.swift */; };
-		F5546D5C222C43D8003CE563 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D5B222C43D8003CE563 /* Extensions.swift */; };
+		F5546D5C222C43D8003CE563 /* Cell + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */; };
 		F586F9A82235A83300B5D504 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586F9A72235A83300B5D504 /* DBManager.swift */; };
+		F59706B522B2E352008C84E8 /* ModalVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59706B422B2E352008C84E8 /* ModalVCPresenter.swift */; };
+		F59706B722B2E36E008C84E8 /* ModalVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59706B622B2E36E008C84E8 /* ModalVCView.swift */; };
+		F5B40E6022B43B1400EE7E64 /* ViewContr + MyExten.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B40E5F22B43B1400EE7E64 /* ViewContr + MyExten.swift */; };
+		F5B40E6222B43B4400EE7E64 /* UIColor + Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B40E6122B43B4400EE7E64 /* UIColor + Gradient.swift */; };
+		F5B40E6422B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B40E6322B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift */; };
+		F5B40E6622B43C1300EE7E64 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B40E6522B43C1300EE7E64 /* Constraints.swift */; };
 		F5B820BD2242C25600D8B411 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5546D61222C496E003CE563 /* LocalAuthentication.framework */; };
 		F5B820BF2242DC4300D8B411 /* Valet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B820BE2242DC4300D8B411 /* Valet.framework */; };
 		F5E405A82246AE6200DA4479 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E405A72246AE6200DA4479 /* PageVC.swift */; };
@@ -50,9 +56,15 @@
 		F5546D55222C4362003CE563 /* PreAddNewSiteCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddNewSiteCollectionVC.swift; sourceTree = "<group>"; };
 		F5546D57222C4374003CE563 /* PreAddNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddNSCollectionViewCell.swift; sourceTree = "<group>"; };
 		F5546D59222C4383003CE563 /* PreAddSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddSiteManager.swift; sourceTree = "<group>"; };
-		F5546D5B222C43D8003CE563 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell + Shadow.swift"; sourceTree = "<group>"; };
 		F5546D61222C496E003CE563 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		F586F9A72235A83300B5D504 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		F59706B422B2E352008C84E8 /* ModalVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalVCPresenter.swift; sourceTree = "<group>"; };
+		F59706B622B2E36E008C84E8 /* ModalVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalVCView.swift; sourceTree = "<group>"; };
+		F5B40E5F22B43B1400EE7E64 /* ViewContr + MyExten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewContr + MyExten.swift"; sourceTree = "<group>"; };
+		F5B40E6122B43B4400EE7E64 /* UIColor + Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Gradient.swift"; sourceTree = "<group>"; };
+		F5B40E6322B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nav Contr + FadeAnimaate.swift"; sourceTree = "<group>"; };
+		F5B40E6522B43C1300EE7E64 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		F5B820BE2242DC4300D8B411 /* Valet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Valet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E405A72246AE6200DA4479 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 		F5E405A92246AE8000DA4479 /* ContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentVC.swift; sourceTree = "<group>"; };
@@ -95,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				F5546D23222C4148003CE563 /* SavePass */,
+				F5B40E6722B43C6700EE7E64 /* Extensions */,
 				F5546D22222C4148003CE563 /* Products */,
 				618E22AD9B7E67715330612E /* Pods */,
 				9DFCEAD1180AC2FCB2976E84 /* Frameworks */,
@@ -113,16 +126,15 @@
 			isa = PBXGroup;
 			children = (
 				F5546D28222C4148003CE563 /* Main.storyboard */,
-				F5546D5B222C43D8003CE563 /* Extensions.swift */,
 				F5546D24222C4148003CE563 /* AppDelegate.swift */,
-				F5E405AB2246AE8800DA4479 /* PageVC */,
 				F5546D4A222C428B003CE563 /* SitesCollectionView */,
 				F5546D5F222C466A003CE563 /* Modal VC */,
 				F5546D60222C4681003CE563 /* NewSiteVC */,
-				F5546D5D222C464F003CE563 /* Realm */,
 				F5546D5E222C465A003CE563 /* PreAddSite */,
+				F5B40E5E22B43AB800EE7E64 /* Model */,
+				F5E405AB2246AE8800DA4479 /* PageVC */,
+				F5546D5D222C464F003CE563 /* Realm */,
 				F5546D2B222C4149003CE563 /* Assets.xcassets */,
-				F5546D51222C4336003CE563 /* SiteManager.swift */,
 				F5546D2D222C4149003CE563 /* LaunchScreen.storyboard */,
 				F5546D30222C4149003CE563 /* Info.plist */,
 			);
@@ -161,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				F5546D4B222C42AE003CE563 /* ModalVC.swift */,
+				F59706B422B2E352008C84E8 /* ModalVCPresenter.swift */,
+				F59706B622B2E36E008C84E8 /* ModalVCView.swift */,
 			);
 			path = "Modal VC";
 			sourceTree = "<group>";
@@ -172,6 +186,26 @@
 				F5546D4F222C4320003CE563 /* NewSiteTableViewCell.swift */,
 			);
 			path = NewSiteVC;
+			sourceTree = "<group>";
+		};
+		F5B40E5E22B43AB800EE7E64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F5546D51222C4336003CE563 /* SiteManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5B40E6722B43C6700EE7E64 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */,
+				F5B40E6522B43C1300EE7E64 /* Constraints.swift */,
+				F5B40E6122B43B4400EE7E64 /* UIColor + Gradient.swift */,
+				F5B40E5F22B43B1400EE7E64 /* ViewContr + MyExten.swift */,
+				F5B40E6322B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F5E405AB2246AE8800DA4479 /* PageVC */ = {
@@ -217,6 +251,7 @@
 				TargetAttributes = {
 					F5546D20222C4148003CE563 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -284,10 +319,9 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SavePass/Pods-SavePass-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AppLocker/AppLocker.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaProxy/CocoaProxy.framework",
-				"${BUILT_PRODUCTS_DIR}/InfiniteLayout/InfiniteLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SPFakeBar/SPFakeBar.framework",
 				"${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework",
 				"${BUILT_PRODUCTS_DIR}/SparrowKit/SparrowKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Valet/Valet.framework",
@@ -297,10 +331,9 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppLocker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaProxy.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InfiniteLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPFakeBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPStorkController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SparrowKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Valet.framework",
@@ -318,20 +351,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5546D54222C4349003CE563 /* RealmSiteList.swift in Sources */,
+				F5B40E6622B43C1300EE7E64 /* Constraints.swift in Sources */,
+				F5B40E6222B43B4400EE7E64 /* UIColor + Gradient.swift in Sources */,
 				F5546D25222C4148003CE563 /* AppDelegate.swift in Sources */,
 				F5E405AA2246AE8000DA4479 /* ContentVC.swift in Sources */,
 				F5546D58222C4374003CE563 /* PreAddNSCollectionViewCell.swift in Sources */,
 				F5E405A82246AE6200DA4479 /* PageVC.swift in Sources */,
+				F59706B722B2E36E008C84E8 /* ModalVCView.swift in Sources */,
+				F5B40E6422B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift in Sources */,
 				F586F9A82235A83300B5D504 /* DBManager.swift in Sources */,
 				F5546D50222C4320003CE563 /* NewSiteTableViewCell.swift in Sources */,
+				F5B40E6022B43B1400EE7E64 /* ViewContr + MyExten.swift in Sources */,
 				F5546D47222C423D003CE563 /* SitesCollectionVC.swift in Sources */,
 				F5546D4C222C42AE003CE563 /* ModalVC.swift in Sources */,
 				F5546D52222C4336003CE563 /* SiteManager.swift in Sources */,
-				F5546D5C222C43D8003CE563 /* Extensions.swift in Sources */,
+				F5546D5C222C43D8003CE563 /* Cell + Shadow.swift in Sources */,
 				F5546D56222C4362003CE563 /* PreAddNewSiteCollectionVC.swift in Sources */,
 				F5546D49222C427D003CE563 /* SitesCollectionViewCell.swift in Sources */,
 				F5546D4E222C430B003CE563 /* NewSiteTableVC.swift in Sources */,
 				F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */,
+				F59706B522B2E352008C84E8 /* ModalVCPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +527,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kaboo.SavePass1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -508,7 +547,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kaboo.SavePass1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

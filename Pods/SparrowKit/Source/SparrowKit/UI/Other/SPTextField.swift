@@ -21,9 +21,9 @@
 
 import UIKit
 
-open class SPTextField: UITextField {
+class SPTextField: UITextField {
     
-    public var textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+    var textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet { setNeedsDisplay() }
     }
     
@@ -38,26 +38,26 @@ open class SPTextField: UITextField {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
     
     internal func commonInit() {}
     
-    open override func textRect(forBounds bounds: CGRect) -> CGRect {
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: textInsets)
     }
     
-    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: textInsets)
     }
     
-    open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: textInsets)
     }
     
-    open override func drawText(in rect: CGRect) {
+    override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: textInsets))
     }
 }

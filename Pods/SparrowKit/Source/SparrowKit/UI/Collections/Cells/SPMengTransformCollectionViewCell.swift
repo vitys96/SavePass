@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPMengTransformCollectionViewCell: SPCollectionViewCell {
+class SPMengTransformCollectionViewCell: SPCollectionViewCell {
     
     let backgroundImageView = SPDownloadingImageView()
     let titleLabel = UILabel()
@@ -153,7 +153,7 @@ open class SPMengTransformCollectionViewCell: SPCollectionViewCell {
             contentView.bottomAnchor, constant: -20).isActive = true
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.backgroundImageView.image = nil
         self.titleLabel.text = ""

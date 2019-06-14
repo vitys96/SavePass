@@ -21,13 +21,13 @@
 
 import UIKit
 
-public class SPWhatsApp {
+class SPWhatsApp {
     
-    public static var isSetApp: Bool {
+    static var isSetApp: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "whatsapp://send?text=test")!)
     }
     
-    public static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
+    static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
         let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
         let urlOptional = URL(string: "whatsapp://send?text=\(urlStringEncoded ?? "")")
         if let url = urlOptional {

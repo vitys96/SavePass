@@ -21,13 +21,13 @@
 
 import UIKit
 
-public class SPTwitter {
+class SPTwitter {
     
-    public static var isSetApp: Bool {
+    static var isSetApp: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "twitter://post?message=test")!)
     }
     
-    public static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
+    static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
         let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
         let urlOptional = URL(string: "twitter://post?message=\(urlStringEncoded ?? "")")
         if let url = urlOptional {

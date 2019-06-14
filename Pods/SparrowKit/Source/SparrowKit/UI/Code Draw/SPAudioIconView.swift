@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPAudioIconView: UIView {
+class SPAudioIconView: UIView {
     
     var type: IconType {
         didSet {
@@ -51,11 +51,11 @@ open class SPAudioIconView: UIView {
         self.backgroundColor = UIColor.clear
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         switch type {
         case .play:

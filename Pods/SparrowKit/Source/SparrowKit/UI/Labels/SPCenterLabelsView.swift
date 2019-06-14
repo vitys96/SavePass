@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPCenterLabelsView: SPView {
+class SPCenterLabelsView: SPView {
     
     let titleLabel = SPLabel()
     let subtitleLabel = SPLabel()
@@ -48,7 +48,7 @@ open class SPCenterLabelsView: SPView {
         self.layoutSubviews()
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         self.titleLabel.frame.set(width: self.frame.width)

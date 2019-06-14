@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPTextView: UITextView {
+class SPTextView: UITextView {
     
     var cursorColor: UIColor = UIColor.blue {
         didSet {
@@ -34,7 +34,7 @@ open class SPTextView: UITextView {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }

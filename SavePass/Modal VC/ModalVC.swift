@@ -2,6 +2,7 @@ import UIKit
 import SPStorkController
 import SparrowKit
 import RealmSwift
+import SPFakeBar
 
 protocol ModalVCDelegate {
     func didChangeInfo()
@@ -16,6 +17,8 @@ class ModalVC: UIViewController {
     
     var delegate: ModalVCDelegate?
     
+    var presenter = ModalVcPresenterPresenter()
+    
     var toggle = true
     var titleLabel = String()
     
@@ -23,7 +26,7 @@ class ModalVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
     
-    lazy var loginLabelText: UILabel = {
+    var loginLabelText: UILabel = {
         let label = UILabel()
         label.text = "Логин"
         label.textColor = .gray
@@ -31,47 +34,45 @@ class ModalVC: UIViewController {
         return label
     }()
     
-    lazy var siteLoginTextField: UITextField = {
+     var siteLoginTextField: UITextField = {
         let siteLabel = UITextField()
         siteLabel.isEnabled = false
         siteLabel.textColor = .black
         siteLabel.font = UIFont.systemFont(ofSize: 19)
-        siteLabel.text = selectedSite?.siteLogin
         return siteLabel
     }()
     
-    lazy var separator: UIView = {
+    var separator: UIView = {
         let separator = UIView()
         separator.backgroundColor = UIColor(hexValue: "#dbdbdb", alpha: 1.0)
         return separator
     }()
     
-    lazy var passwordLabelText: UILabel = {
+    var passwordLabelText: UILabel = {
         let label = UILabel()
         label.text = "Пароль"
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 16)
-        
         return label
     }()
     
-    lazy var sitePasswordTextField: UITextField = {
+    var sitePasswordTextField: UITextField = {
         let passwdLabel = UITextField()
         passwdLabel.isEnabled = false
         passwdLabel.isSecureTextEntry = true
         passwdLabel.font = UIFont.systemFont(ofSize: 19)
         passwdLabel.textColor = .black
-        passwdLabel.text = selectedSite?.sitePassword
+        
         return passwdLabel
     }()
     
-    lazy var separatorTwo: UIView = {
+    var separatorTwo: UIView = {
         let separator = UIView()
         separator.backgroundColor = UIColor(hexValue: "#dbdbdb", alpha: 1.0)
         return separator
     }()
     
-    lazy var copyButton: UIButton = {
+    var copyButton: UIButton = {
         let copy = UIButton()
         copy.setBackgroundImage(UIImage(named: "copyImage"), for: .normal)
         copy.contentMode = .scaleAspectFit
@@ -80,7 +81,7 @@ class ModalVC: UIViewController {
         return copy
     }()
     
-    lazy var copyButtonTwo: UIButton = {
+    var copyButtonTwo: UIButton = {
         let copy = UIButton()
         copy.setBackgroundImage(UIImage(named: "copyImage"), for: .normal)
         copy.contentMode = .scaleAspectFit
@@ -89,7 +90,7 @@ class ModalVC: UIViewController {
         return copy
     }()
     
-    lazy var showPassword: UIButton = {
+    var showPassword: UIButton = {
         let copy = UIButton()
         copy.setBackgroundImage(UIImage(named: "visible"), for: .normal)
         copy.contentMode = .scaleAspectFit
@@ -112,14 +113,18 @@ class ModalVC: UIViewController {
         
         self.navBar.leftButton.setTitle("Поделиться", for: .normal)
         self.navBar.leftButton.setTitleColor(.blue, for: .highlighted)
-        self.navBar.leftButton.addTarget(self, action: #selector(self.deleteSite), for: .touchUpInside)
+        self.navBar.leftButton.addTarget(self, action: #selector(self.shareSite), for: .touchUpInside)
         
         self.navBar.rightButton.setTitle("Просмотреть", for: .normal)
         self.navBar.rightButton.addTarget(self, action: #selector(changeInfo), for: .touchUpInside)
         
         [navBar, siteLoginTextField, sitePasswordTextField, loginLabelText, passwordLabelText, separator, separatorTwo, copyButton, copyButtonTwo, showPassword].forEach(view.addSubview)
-        
-        
+        setup()
+    }
+    
+    func setup() {
+        siteLoginTextField.text = selectedSite?.siteLogin
+        sitePasswordTextField.text = selectedSite?.sitePassword
     }
     
     @objc func copyLoginText() {
@@ -130,32 +135,19 @@ class ModalVC: UIViewController {
         copyTextInTextField(your: sitePasswordTextField)
     }
     
-    
     @objc func changeInfo() {
         self.delegate?.didChangeInfo()
     }
     
-    @objc func deleteSite() {
-        let alertController = UIAlertController(title: "Вы уверены, что хотите поделиться?", message: "Имя сайта, его адрес, логин и пароль станут известны отправителю", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "Поделиться", style: .default) { (action) in
-            let items = [self]
-            
-            let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            self.present(activityController, animated: true)
-        }
-        alertController.addAction(deleteAction)
-        alertController.addAction(okAction)
-        
-        self.present(alertController, animated: true, completion: nil)
+    @objc func shareSite() {
+        self.presenter.shareSite(vc: self)
     }
     
     @objc private func showHidePasswd() {
         switchShowHidePasButton(showHideButton: showPassword, securityTextEntry: sitePasswordTextField, variable: &toggle)
     }
     
-    
-    
+
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (contex) in

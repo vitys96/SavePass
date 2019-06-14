@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPBaseContentTableViewCell: SPTableViewCell {
+class SPBaseContentTableViewCell: SPTableViewCell {
     
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
@@ -29,7 +29,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
     let iconImageView = SPDownloadingImageView()
     let button = SPAppStoreActionButton()
     
-    open var withImage: Bool = true {
+    var withImage: Bool = true {
         didSet {
             if withImage {
                 self.iconImageView.isHidden = false
@@ -48,13 +48,13 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var roundImage: Bool = false {
+    var roundImage: Bool = false {
         didSet {
             self.layoutSubviews()
         }
     }
     
-    open var withSubtitle: Bool = true {
+    var withSubtitle: Bool = true {
         didSet {
             self.descriptionLabelTopConstraint.isActive = false
             self.descriptionLabel.removeConstraint(self.descriptionLabelTopConstraint)
@@ -70,7 +70,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var withButton: Bool = false {
+    var withButton: Bool = false {
         didSet {
             if withButton {
                 self.button.isHidden = false
@@ -87,7 +87,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var centerXButton: Bool = false {
+    var centerXButton: Bool = false {
         didSet {
             if self.centerXButton {
                 self.buttonLeadingConstraint.isActive = false
@@ -100,7 +100,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var imageSide: CGFloat = 63 {
+    var imageSide: CGFloat = 63 {
         didSet {
             self.iconImageWidthConstraint.constant = self.imageSide
             self.iconImageHeightConstraint.constant = self.imageSide
@@ -108,7 +108,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var topSpace: CGFloat = 11 {
+    var topSpace: CGFloat = 11 {
         didSet {
             self.iconImageTopConstraint.constant = self.topSpace
             self.titleLabelTopConstraint.constant = self.topSpace - 2
@@ -116,7 +116,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var spaceAfterTitle: CGFloat = 2 {
+    var spaceAfterTitle: CGFloat = 2 {
         didSet {
             if self.withSubtitle {
                 self.subtitleLabelTopConstraint.constant = self.spaceAfterTitle
@@ -127,7 +127,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var spaceAfterSubtitle: CGFloat = 2 {
+    var spaceAfterSubtitle: CGFloat = 2 {
         didSet {
             if self.withSubtitle {
                 self.descriptionLabelTopConstraint.constant = self.spaceAfterSubtitle
@@ -136,14 +136,14 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var spaceAfterDescribtion: CGFloat = 19 {
+    var spaceAfterDescribtion: CGFloat = 19 {
         didSet {
             self.buttonTopConstraint.constant = self.spaceAfterDescribtion
             self.updateConstraints()
         }
     }
     
-    open var bottomSpace: CGFloat = 7 {
+    var bottomSpace: CGFloat = 7 {
         didSet {
             if self.withButton {
                 self.buttonBottomConstraint.constant = -self.bottomSpace
@@ -154,14 +154,14 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         }
     }
     
-    open var spaceBetweenImageAndTitles: CGFloat = 14 {
+    var spaceBetweenImageAndTitles: CGFloat = 14 {
         didSet {
             self.titleLabelLeadingConstraint.constant = self.spaceBetweenImageAndTitles
             self.updateConstraints()
         }
     }
     
-    override open var contentViews: [UIView] {
+    override var contentViews: [UIView] {
         return [self.iconImageView, self.titleLabel, self.subtitleLabel, self.descriptionLabel]
     }
     
@@ -185,7 +185,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -291,7 +291,7 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         
         self.accessoryType = .none
         self.separatorInsetStyle = .beforeImage
-        self.iconImageView.startLoading()
+        self.iconImageView.removeImage()
         self.iconImageView.setNative()
         
         self.titleLabel.text = "Title"
@@ -318,24 +318,24 @@ open class SPBaseContentTableViewCell: SPTableViewCell {
         self.spaceBetweenImageAndTitles = 15
     }
     
-    override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let myViewBackgroundColor = self.iconImageView.gradeView.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         self.iconImageView.gradeView.backgroundColor = myViewBackgroundColor
     }
     
-    override open func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         let myViewBackgroundColor = self.iconImageView.gradeView.backgroundColor
         super.setSelected(selected, animated: animated)
         self.iconImageView.gradeView.backgroundColor = myViewBackgroundColor
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.setDefaultParametrs()
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         if self.roundImage {

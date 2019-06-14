@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPImageView: UIImageView {
+class SPImageView: UIImageView {
     
     var round: Bool = false {
         didSet {
@@ -39,14 +39,14 @@ open class SPImageView: UIImageView {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
     
     internal func commonInit() {}
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         if self.round {
             self.layer.masksToBounds = true

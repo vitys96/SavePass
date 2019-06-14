@@ -21,13 +21,13 @@
 
 import UIKit
 
-public class SPTelegram {
+class SPTelegram {
     
-    public static var isSetApp: Bool {
+    static var isSetApp: Bool {
         return UIApplication.shared.canOpenURL(URL(string: "tg://msg?text=test")!)
     }
     
-    public static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
+    static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
         let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
         let urlOptional = URL(string: "tg://msg?text=\(urlStringEncoded ?? "")")
         if let url = urlOptional {
@@ -41,12 +41,17 @@ public class SPTelegram {
         }
     }
     
-    public static func joinChannel(id: String) {
+    static func joinChannel(id: String) {
         let url = "https://t.me/joinchat/\(id)"
         SPApp.open(link: url, redirect: true)
     }
     
-    public static func openBot(username: String) {
+    static func joinChat(id: String) {
+        let url = "https://t.me/joinchat/\(id)"
+        SPApp.open(link: url, redirect: true)
+    }
+    
+    static func openBot(username: String) {
         var username = username
         if username.first == "@" {
             username.removeFirst()
@@ -55,9 +60,14 @@ public class SPTelegram {
         SPApp.open(link: url, redirect: true)
     }
     
+    static func openDialog(username: String) {
+        let url = "https://t.me/\(username)"
+        SPApp.open(link: url, redirect: true)
+    }
+    
     private init() {}
 }
 
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPProposeTableViewCell: UITableViewCell {
+class SPProposeTableViewCell: UITableViewCell {
     
     let titleLabel = UILabel.init()
     let button = SPAppStoreActionButton.init()
@@ -62,11 +62,11 @@ open class SPProposeTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.button.setTitle("Action", for: .normal)
         self.titleLabel.text = nil

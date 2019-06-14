@@ -23,7 +23,7 @@ class PageVC: UIPageViewController {
         super.viewDidLoad()
         
         dataSource = self
-        self.view.addVerticalGradientLayer(topColor: UIColor(hex: "#ecf0f1"), bottomColor: UIColor(hex: "#add3e5"))
+        self.view.addVerticalGradientLayer(topColor: UIColor(named: "#ecf0f1")!, bottomColor: UIColor(named: "#add3e5")!)
         
         if let firstVC = displayViewController(atIndex: 0) {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)

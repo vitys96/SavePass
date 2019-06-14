@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPFormLabelTableViewCell: SPTableViewCell {
+class SPFormLabelTableViewCell: SPTableViewCell {
     
     let label: UILabel = UILabel()
     let descriptionLabel: UILabel = UILabel()
@@ -29,11 +29,11 @@ open class SPFormLabelTableViewCell: SPTableViewCell {
     var fixWidthLabel: CGFloat? = nil
     var onlyLeftLabel: Bool = false
     
-    override open var contentViews: [UIView] {
+    override var contentViews: [UIView] {
         return [self.descriptionLabel]
     }
     
-    override open var accessoryType: UITableViewCell.AccessoryType {
+    override var accessoryType: UITableViewCell.AccessoryType {
         didSet {
             if self.accessoryType == .disclosureIndicator {
                 self.selectionStyle = .default
@@ -48,7 +48,7 @@ open class SPFormLabelTableViewCell: SPTableViewCell {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -74,7 +74,7 @@ open class SPFormLabelTableViewCell: SPTableViewCell {
         self.accessoryType = .none
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
         self.label.text = "Title"
@@ -84,7 +84,7 @@ open class SPFormLabelTableViewCell: SPTableViewCell {
         self.fixWidthLabel = nil
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         let xPosition: CGFloat = (self.imageView?.frame.bottomX ?? 0) + self.layoutMargins.left

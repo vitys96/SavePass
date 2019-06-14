@@ -22,15 +22,15 @@
 import UIKit
 import UserNotifications
 
-public struct SPLocalNotification {
+struct SPLocalNotification {
     
-    public var identificator: String? = nil
-    public var text: String
-    public var title: String? = nil
-    public var badge: Int = 0
-    public var timeInterval: TimeInterval
-    public var soundEnabled: Bool = true
-    public var category: SPLocalNotificationCategory? = nil
+    var identificator: String? = nil
+    var text: String
+    var title: String? = nil
+    var badge: Int = 0
+    var timeInterval: TimeInterval
+    var soundEnabled: Bool = true
+    var category: SPLocalNotificationCategory? = nil
     
     init(after timeInterval: TimeInterval, text: String) {
         self.text = text
@@ -77,12 +77,12 @@ public struct SPLocalNotification {
     }
 }
 
-public struct SPLocalNotificationCategory {
+struct SPLocalNotificationCategory {
     
     var identifier: String
     var summary: String
     
-    public var countSymbol: String {
+    var countSymbol: String {
         return "%u"
     }
 }

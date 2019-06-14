@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPSystemIconView: UIView {
+class SPSystemIconView: UIView {
     
     var icon: SPSystemIcon {
         didSet {
@@ -51,11 +51,11 @@ open class SPSystemIconView: UIView {
         self.backgroundColor = UIColor.clear
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         switch icon {
         case .share:

@@ -21,12 +21,12 @@
 
 import UIKit
 
-public enum SPLocale: String, CaseIterable {
+enum SPLocale: String, CaseIterable {
     
     case ru = "ru"
     case en = "en"
     
-    static public var current: SPLocale {
+    static var current: SPLocale {
         set {
             UserDefaults.standard.set([newValue.languageCode], forKey: "AppleLanguages")
         }
@@ -44,11 +44,11 @@ public enum SPLocale: String, CaseIterable {
         }
     }
     
-    public var languageCode: String {
+    var languageCode: String {
         return self.rawValue
     }
     
-    public var describtion: String {
+    var describtion: String {
         switch self {
         case .en:
             return "English"

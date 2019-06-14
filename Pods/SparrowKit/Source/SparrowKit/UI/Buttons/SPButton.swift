@@ -21,9 +21,9 @@
 
 import UIKit
 
-open class SPButton: UIButton {
+class SPButton: UIButton {
     
-    override open func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         if self.title(for: .normal) != nil {
             let inset: CGFloat = 6
             let sideSize = self.frame.height - inset * 2
@@ -34,7 +34,7 @@ open class SPButton: UIButton {
         }
     }
     
-    override open var isHighlighted: Bool{
+    override var isHighlighted: Bool {
         didSet {
             if self.isHighlighted {
                 self.imageView?.alpha = 0.7
@@ -44,18 +44,20 @@ open class SPButton: UIButton {
         }
     }
     
-    open var gradientView: SPGradientView? {
+    var gradientView: SPGradientView? {
         didSet {
             self.gradientView?.isUserInteractionEnabled = false
             if self.gradientView?.superview == nil {
                 if self.gradientView != nil {
-                    self.insertSubview(self.gradientView!, at: 0)
+                    if self.imageView != nil {
+                        self.insertSubview(self.gradientView!, belowSubview: self.imageView!)
+                    }
                 }
             }
         }
     }
     
-    open var rounded: Bool = false {
+    var rounded: Bool = false {
         didSet {
             self.layoutSubviews()
         }
@@ -66,7 +68,7 @@ open class SPButton: UIButton {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -75,7 +77,7 @@ open class SPButton: UIButton {
         self.adjustsImageWhenHighlighted = false
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         self.gradientView?.setSuperviewBounds()
         if self.rounded {
@@ -83,7 +85,7 @@ open class SPButton: UIButton {
         }
     }
     
-    public func set(enable: Bool, animatable: Bool) {
+    func set(enable: Bool, animatable: Bool) {
         self.isEnabled = enable
         if animatable {
             SPAnimation.animate(0.3, animations: {

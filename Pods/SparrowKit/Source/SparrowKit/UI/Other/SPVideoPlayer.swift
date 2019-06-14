@@ -22,7 +22,7 @@
 import UIKit
 import AVKit
 
-open class SPVideoPlayerView: UIView {
+class SPVideoPlayerView: UIView {
     
     var playerController = AVPlayerViewController.init()
     
@@ -46,11 +46,11 @@ open class SPVideoPlayerView: UIView {
         self.playerController.view.alpha = 1
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         self.playerController.view.setSuperviewBounds()
     }

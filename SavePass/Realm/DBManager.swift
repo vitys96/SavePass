@@ -20,7 +20,7 @@ class DBManager {
     func addDataSiteList(object: SiteList) {
         do {
             try database.write {
-                database.add(object, update: true)
+                database.add(object, update: .all)
             }
         }
         catch {

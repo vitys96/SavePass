@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPGolubevIconView: UIView {
+class SPGolubevIconView: UIView {
     
     var type: IconType {
         didSet {
@@ -69,11 +69,11 @@ open class SPGolubevIconView: UIView {
         self.backgroundColor = UIColor.clear
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         switch type {
         case .camera:
@@ -109,7 +109,7 @@ open class SPGolubevIconView: UIView {
         }
     }
     
-    public enum IconType {
+    enum IconType {
         case camera
         case photoLibrary
         case ball

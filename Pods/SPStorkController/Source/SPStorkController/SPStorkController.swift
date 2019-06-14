@@ -35,7 +35,9 @@ public struct SPStorkController {
                     presentationController.setIndicator(style: scrollView.isTracking ? .line : .arrow)
                     if translation >= presentationController.translateForDismiss * 0.4 {
                         if !scrollView.isTracking && !scrollView.isDragging {
-                            presentationController.presentedViewController.dismiss(animated: true, completion: nil)
+                            presentationController.presentedViewController.dismiss(animated: true, completion: {
+                                presentationController.storkDelegate?.didDismissStorkBySwipe?()
+                            })
                             return
                         }
                     }
@@ -46,11 +48,17 @@ public struct SPStorkController {
                     presentationController.setIndicator(style: .arrow)
                     presentationController.scrollViewDidScroll(0)
                 }
+                
+                if translation < -5 {
+                    presentationController.setIndicator(visible: false, forse: (translation < -50))
+                } else {
+                    presentationController.setIndicator(visible: true, forse: false)
+                }
             }
         }
     }
     
-    static var topScrollIndicatorInset: CGFloat {
+    static public var topScrollIndicatorInset: CGFloat {
         return 6
     }
     

@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPFormButtonTableViewCell: UITableViewCell {
+class SPFormButtonTableViewCell: UITableViewCell {
     
     let button = SPDownloadingButton()
     
@@ -36,7 +36,7 @@ open class SPFormButtonTableViewCell: UITableViewCell {
         self.commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
@@ -51,14 +51,14 @@ open class SPFormButtonTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.button)
     }
     
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         self.button.setTitle("Button", for: .normal)
         self.button.removeAllTargets()
         self.selectionStyle = .none
     }
     
-    override open func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         self.button.setSuperviewBounds()
         

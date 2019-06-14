@@ -3,7 +3,6 @@ import SPStorkController
 import RealmSwift
 import LocalAuthentication
 import AppLocker
-import InfiniteLayout
 
 class SitesCollectionVC: UICollectionViewController {
     
@@ -110,52 +109,6 @@ class SitesCollectionVC: UICollectionViewController {
     }
     
     
-    
-    // MARK: - Table View data source
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
-            return filterResultArray.count
-        }
-        return DBManager.sharedInstance.getDataFromSiteList().count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SitesCollectionViewCell
-        
-        configureCell(cell: cell!, indexPath: indexPath)
-        return cell!
-    }
-    
-    
-    
-    // MARK: - Table View delegate
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        //        let index = indexPath.item
-        searchController.searchBar.resignFirstResponder()
-        
-        let site = siteToDisplayAt(indexPath: indexPath)
-        
-        let modal = ModalVC()
-        let transitionDelegate = SPStorkTransitioningDelegate()
-        transitionDelegate.customHeight = 400
-        
-        modal.transitioningDelegate = transitionDelegate
-        modal.modalPresentationStyle = .custom
-        
-        modal.delegate = self
-        modal.selectedSite = site
-        //        modal.navBar.titleLabel.text = site.siteName
-        modal.titleLabel = site.siteName
-        
-        present(modal, animated: true, completion: nil)
-        
-        self.selectedSite = site
-    }
-    
-    
     // MARK: - MY FUNCTIONS
     
     private func configureStartScreen() {
@@ -239,6 +192,56 @@ class SitesCollectionVC: UICollectionViewController {
 }
 
 // MARK: - EXTENSIONS
+
+extension SitesCollectionVC {
+    
+    // MARK: - Table View data source
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filterResultArray.count
+        }
+        return DBManager.sharedInstance.getDataFromSiteList().count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SitesCollectionViewCell
+        
+        configureCell(cell: cell!, indexPath: indexPath)
+        return cell!
+    }
+    
+    
+    
+    // MARK: - Table View delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        searchController.searchBar.resignFirstResponder()
+        
+        let site = siteToDisplayAt(indexPath: indexPath)
+        
+        let modal = ModalVC()
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        transitionDelegate.customHeight = 400
+        transitionDelegate.hapticMoments = [.willPresent, .willDismiss]
+        
+        modal.transitioningDelegate = transitionDelegate
+        modal.modalPresentationStyle = .custom
+        
+        
+        modal.delegate = self
+        modal.selectedSite = site
+
+        modal.titleLabel = site.siteName
+        
+        present(modal, animated: true, completion: nil)
+        
+        self.selectedSite = site
+    }
+}
+
+
 
 extension SitesCollectionVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

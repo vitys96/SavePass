@@ -22,37 +22,18 @@
 import UIKit
 import LocalAuthentication
 
-public struct SPLocalAuthentication {
+struct SPLocalAuthentication {
     
-    public static var isEnable: Bool {
+    static var isEnable: Bool {
         let context = LAContext()
         var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            return true
-        } else {
-            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-                return true
-            } else {
-                return false
-            }
-        }
+        return context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
     }
     
-    public static func request(reason: String, complecton: @escaping (Bool)->()) {
+    static func request(reason: String, complecton: @escaping (Bool)->()) {
         let context = LAContext()
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
-                DispatchQueue.main.async { complecton(success) }
-            }
-        } else {
-            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-                context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
-                    DispatchQueue.main.async { complecton(success) }
-                }
-            } else {
-                complecton(false)
-            }
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
+            DispatchQueue.main.async { complecton(success) }
         }
     }
     

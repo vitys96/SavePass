@@ -21,7 +21,7 @@
 
 import UIKit
 
-open class SPSocialIconView: UIView {
+class SPSocialIconView: UIView {
     
     var type: SPSocialNetwork {
         didSet {
@@ -51,11 +51,11 @@ open class SPSocialIconView: UIView {
         self.backgroundColor = UIColor.clear
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override open func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
         switch type {
         case .facebook:

@@ -21,29 +21,29 @@
 
 import UIKit
 
-open class SPController: SPStatusBarManagerController {
+class SPController: SPStatusBarManagerController {
     
     let emptyTitlesView = SPEmptyLabelsView(title: "No Data", subtitle: "No data or information")
     
-    override open func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.emptyTitlesView.isHidden = true
         self.view.addSubview(self.emptyTitlesView)
     }
     
-    override open func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.updateLayout(with: self.view.frame.size)
     }
     
-    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (contex) in
             self.updateLayout(with: size)
         }, completion: nil)
     }
     
-    open func updateLayout(with size: CGSize) {
+    func updateLayout(with size: CGSize) {
         self.emptyTitlesView.layout(centerY: size.height / 2)
     }
     

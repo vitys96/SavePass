@@ -21,8 +21,6 @@ class SitesCollectionViewCell: UICollectionViewCell {
     }
     
     func setup() {
-        
-        
 
         self.backgroundColor = .white
         
