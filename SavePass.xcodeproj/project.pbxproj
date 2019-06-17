@@ -23,6 +23,8 @@
 		F5546D58222C4374003CE563 /* PreAddNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D57222C4374003CE563 /* PreAddNSCollectionViewCell.swift */; };
 		F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D59222C4383003CE563 /* PreAddSiteManager.swift */; };
 		F5546D5C222C43D8003CE563 /* Cell + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */; };
+		F57D460922B51DAD00E372C2 /* SitesCollectionVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */; };
+		F57D460B22B5412D00E372C2 /* SitesCollectionVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */; };
 		F586F9A82235A83300B5D504 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586F9A72235A83300B5D504 /* DBManager.swift */; };
 		F59706B522B2E352008C84E8 /* ModalVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59706B422B2E352008C84E8 /* ModalVCPresenter.swift */; };
 		F59706B722B2E36E008C84E8 /* ModalVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59706B622B2E36E008C84E8 /* ModalVCView.swift */; };
@@ -32,6 +34,10 @@
 		F5B40E6622B43C1300EE7E64 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B40E6522B43C1300EE7E64 /* Constraints.swift */; };
 		F5B820BD2242C25600D8B411 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5546D61222C496E003CE563 /* LocalAuthentication.framework */; };
 		F5B820BF2242DC4300D8B411 /* Valet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B820BE2242DC4300D8B411 /* Valet.framework */; };
+		F5DE49AF22B7FEF400EA9355 /* CardsColVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DE49AE22B7FEF400EA9355 /* CardsColVC.swift */; };
+		F5DE49B122B7FF1300EA9355 /* CardsColViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DE49B022B7FF1300EA9355 /* CardsColViewCell.swift */; };
+		F5DE49B422B827BE00EA9355 /* NewCardTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DE49B322B827BE00EA9355 /* NewCardTableVC.swift */; };
+		F5DE49B622B827D000EA9355 /* NewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DE49B522B827D000EA9355 /* NewCardTableViewCell.swift */; };
 		F5E405A82246AE6200DA4479 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E405A72246AE6200DA4479 /* PageVC.swift */; };
 		F5E405AA2246AE8000DA4479 /* ContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E405A92246AE8000DA4479 /* ContentVC.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +64,8 @@
 		F5546D59222C4383003CE563 /* PreAddSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddSiteManager.swift; sourceTree = "<group>"; };
 		F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell + Shadow.swift"; sourceTree = "<group>"; };
 		F5546D61222C496E003CE563 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesCollectionVCPresenter.swift; sourceTree = "<group>"; };
+		F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesCollectionVCView.swift; sourceTree = "<group>"; };
 		F586F9A72235A83300B5D504 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		F59706B422B2E352008C84E8 /* ModalVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalVCPresenter.swift; sourceTree = "<group>"; };
 		F59706B622B2E36E008C84E8 /* ModalVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalVCView.swift; sourceTree = "<group>"; };
@@ -66,6 +74,10 @@
 		F5B40E6322B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nav Contr + FadeAnimaate.swift"; sourceTree = "<group>"; };
 		F5B40E6522B43C1300EE7E64 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		F5B820BE2242DC4300D8B411 /* Valet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Valet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5DE49AE22B7FEF400EA9355 /* CardsColVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsColVC.swift; sourceTree = "<group>"; };
+		F5DE49B022B7FF1300EA9355 /* CardsColViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsColViewCell.swift; sourceTree = "<group>"; };
+		F5DE49B322B827BE00EA9355 /* NewCardTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardTableVC.swift; sourceTree = "<group>"; };
+		F5DE49B522B827D000EA9355 /* NewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardTableViewCell.swift; sourceTree = "<group>"; };
 		F5E405A72246AE6200DA4479 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 		F5E405A92246AE8000DA4479 /* ContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,10 +139,14 @@
 			children = (
 				F5546D28222C4148003CE563 /* Main.storyboard */,
 				F5546D24222C4148003CE563 /* AppDelegate.swift */,
+				F59D40A222B571DA00571695 /* View */,
+				F59D40A122B571CB00571695 /* Presenter */,
 				F5546D4A222C428B003CE563 /* SitesCollectionView */,
 				F5546D5F222C466A003CE563 /* Modal VC */,
 				F5546D60222C4681003CE563 /* NewSiteVC */,
 				F5546D5E222C465A003CE563 /* PreAddSite */,
+				F5DE49AD22B7FEAA00EA9355 /* Credit Card */,
+				F5DE49B222B8279000EA9355 /* NewCard VC */,
 				F5B40E5E22B43AB800EE7E64 /* Model */,
 				F5E405AB2246AE8800DA4479 /* PageVC */,
 				F5546D5D222C464F003CE563 /* Realm */,
@@ -188,6 +204,22 @@
 			path = NewSiteVC;
 			sourceTree = "<group>";
 		};
+		F59D40A122B571CB00571695 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F59D40A222B571DA00571695 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F5B40E5E22B43AB800EE7E64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +238,24 @@
 				F5B40E6322B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F5DE49AD22B7FEAA00EA9355 /* Credit Card */ = {
+			isa = PBXGroup;
+			children = (
+				F5DE49AE22B7FEF400EA9355 /* CardsColVC.swift */,
+				F5DE49B022B7FF1300EA9355 /* CardsColViewCell.swift */,
+			);
+			path = "Credit Card";
+			sourceTree = "<group>";
+		};
+		F5DE49B222B8279000EA9355 /* NewCard VC */ = {
+			isa = PBXGroup;
+			children = (
+				F5DE49B322B827BE00EA9355 /* NewCardTableVC.swift */,
+				F5DE49B522B827D000EA9355 /* NewCardTableViewCell.swift */,
+			);
+			path = "NewCard VC";
 			sourceTree = "<group>";
 		};
 		F5E405AB2246AE8800DA4479 /* PageVC */ = {
@@ -359,18 +409,24 @@
 				F5E405A82246AE6200DA4479 /* PageVC.swift in Sources */,
 				F59706B722B2E36E008C84E8 /* ModalVCView.swift in Sources */,
 				F5B40E6422B43BA000EE7E64 /* Nav Contr + FadeAnimaate.swift in Sources */,
+				F57D460922B51DAD00E372C2 /* SitesCollectionVCPresenter.swift in Sources */,
 				F586F9A82235A83300B5D504 /* DBManager.swift in Sources */,
+				F5DE49B122B7FF1300EA9355 /* CardsColViewCell.swift in Sources */,
 				F5546D50222C4320003CE563 /* NewSiteTableViewCell.swift in Sources */,
 				F5B40E6022B43B1400EE7E64 /* ViewContr + MyExten.swift in Sources */,
 				F5546D47222C423D003CE563 /* SitesCollectionVC.swift in Sources */,
 				F5546D4C222C42AE003CE563 /* ModalVC.swift in Sources */,
+				F57D460B22B5412D00E372C2 /* SitesCollectionVCView.swift in Sources */,
+				F5DE49B622B827D000EA9355 /* NewCardTableViewCell.swift in Sources */,
 				F5546D52222C4336003CE563 /* SiteManager.swift in Sources */,
+				F5DE49B422B827BE00EA9355 /* NewCardTableVC.swift in Sources */,
 				F5546D5C222C43D8003CE563 /* Cell + Shadow.swift in Sources */,
 				F5546D56222C4362003CE563 /* PreAddNewSiteCollectionVC.swift in Sources */,
 				F5546D49222C427D003CE563 /* SitesCollectionViewCell.swift in Sources */,
 				F5546D4E222C430B003CE563 /* NewSiteTableVC.swift in Sources */,
 				F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */,
 				F59706B522B2E352008C84E8 /* ModalVCPresenter.swift in Sources */,
+				F5DE49AF22B7FEF400EA9355 /* CardsColVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

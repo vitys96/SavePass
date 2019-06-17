@@ -13,8 +13,8 @@ class PreAddNSCollectionViewCell: UICollectionViewCell {
     var site: SiteObject? {
         didSet {
             guard let teamImage = site?.image, let teamName = site?.name else { return }
-            teamImageVieW.image = UIImage(named: teamImage)
-            teamNameLabel.text = teamName
+            siteImageView.image = UIImage(named: teamImage)
+            siteNameLabel.text = teamName
         }
     }
     
@@ -29,21 +29,33 @@ class PreAddNSCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.white
         
         
-        self.addSubview(teamImageVieW)
-        self.addSubview(teamNameLabel)
+        self.addSubview(siteImageView)
+        self.addSubview(siteNameLabel)
         
-        teamImageVieW.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
-        teamNameLabel.anchor(top: teamImageVieW.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        siteImageView.anchor(top: topAnchor,
+                             leading: leadingAnchor,
+                             bottom: nil,
+                             trailing: trailingAnchor,
+                             padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0),
+                             size: CGSize(width: 0, height: 50))
+        
+        siteNameLabel.anchor(top: siteImageView.bottomAnchor,
+                             leading: leadingAnchor,
+                             bottom: nil,
+                             trailing: trailingAnchor,
+                             padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
     }
     
-    let teamImageVieW: UIImageView = {
+    let siteImageView: UIImageView = {
         let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFit
         return iv
     }()
     
-    let teamNameLabel: UILabel = {
+    let siteNameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.gray
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .center

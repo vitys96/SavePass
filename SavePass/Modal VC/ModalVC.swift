@@ -28,6 +28,7 @@ class ModalVC: UIViewController {
     
     var loginLabelText: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Логин"
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 16)
@@ -36,6 +37,7 @@ class ModalVC: UIViewController {
     
      var siteLoginTextField: UITextField = {
         let siteLabel = UITextField()
+        siteLabel.translatesAutoresizingMaskIntoConstraints = false
         siteLabel.isEnabled = false
         siteLabel.textColor = .black
         siteLabel.font = UIFont.systemFont(ofSize: 19)
@@ -50,6 +52,7 @@ class ModalVC: UIViewController {
     
     var passwordLabelText: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Пароль"
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 16)
@@ -58,6 +61,7 @@ class ModalVC: UIViewController {
     
     var sitePasswordTextField: UITextField = {
         let passwdLabel = UITextField()
+        passwdLabel.translatesAutoresizingMaskIntoConstraints = false
         passwdLabel.isEnabled = false
         passwdLabel.isSecureTextEntry = true
         passwdLabel.font = UIFont.systemFont(ofSize: 19)
@@ -68,12 +72,14 @@ class ModalVC: UIViewController {
     
     var separatorTwo: UIView = {
         let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor = UIColor(hexValue: "#dbdbdb", alpha: 1.0)
         return separator
     }()
     
     var copyButton: UIButton = {
         let copy = UIButton()
+        copy.translatesAutoresizingMaskIntoConstraints = false
         copy.setBackgroundImage(UIImage(named: "copyImage"), for: .normal)
         copy.contentMode = .scaleAspectFit
         copy.addTarget(self, action: #selector(copyLoginText), for: .touchUpInside)
@@ -83,6 +89,7 @@ class ModalVC: UIViewController {
     
     var copyButtonTwo: UIButton = {
         let copy = UIButton()
+        copy.translatesAutoresizingMaskIntoConstraints = false
         copy.setBackgroundImage(UIImage(named: "copyImage"), for: .normal)
         copy.contentMode = .scaleAspectFit
         copy.addTarget(self, action: #selector(copyPasswordText), for: .touchUpInside)
@@ -92,6 +99,7 @@ class ModalVC: UIViewController {
     
     var showPassword: UIButton = {
         let copy = UIButton()
+        copy.translatesAutoresizingMaskIntoConstraints = false
         copy.setBackgroundImage(UIImage(named: "visible"), for: .normal)
         copy.contentMode = .scaleAspectFit
         copy.addTarget(self, action: #selector(showHidePasswd), for: .touchUpInside)
@@ -167,22 +175,27 @@ class ModalVC: UIViewController {
         self.separator.center.x = size.width / 2
         self.separator.center.y = size.height / 2
         
-        self.loginLabelText.anchor(top: nil, left: siteLoginTextField.leftAnchor , bottom: siteLoginTextField.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: -10, paddingRight: 0)
-        
-        self.siteLoginTextField.anchor(top: nil, left: separator.leftAnchor, bottom: separator.bottomAnchor, right: copyButton.rightAnchor, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 0, height: 30)
-        
-        self.copyButton.anchor(top: siteLoginTextField.topAnchor, left: nil, bottom: nil, right: separator.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
-        
-        self.passwordLabelText.anchor(top: separator.topAnchor, left: loginLabelText.leftAnchor , bottom: sitePasswordTextField.topAnchor, right: sitePasswordTextField.rightAnchor, paddingTop: 25, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 90, height: 30)
-        
-        
-        self.sitePasswordTextField.anchor(top: passwordLabelText.topAnchor, left: separator.leftAnchor, bottom: separatorTwo.bottomAnchor, right: showPassword.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: separator.frame.width, height: 30)
-        
-        self.copyButtonTwo.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: separatorTwo.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 25, height: 25)
-        
-        self.showPassword.anchor(top: sitePasswordTextField.topAnchor, left: nil, bottom: nil, right: copyButtonTwo.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 25, height: 25)
-        
-        self.separatorTwo.anchor(top: sitePasswordTextField.bottomAnchor, left: separator.leftAnchor, bottom: nil, right: separator.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: size.width / 1.4, height: 2)
+        self.loginLabelText.anchor(top: nil, leading: siteLoginTextField.leadingAnchor , bottom: siteLoginTextField.topAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
+
+        self.siteLoginTextField.anchor(top: nil, leading: separator.leadingAnchor, bottom: separator.bottomAnchor, trailing: copyButton.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 30),
+                                       size: CGSize(width: 0, height: 30))
+
+        self.copyButton.anchor(top: siteLoginTextField.topAnchor, leading: nil, bottom: nil, trailing: separator.trailingAnchor, size: CGSize(width: 25, height: 25))
+
+        self.passwordLabelText.anchor(top: separator.topAnchor, leading: loginLabelText.leadingAnchor , bottom: sitePasswordTextField.topAnchor, trailing: sitePasswordTextField.trailingAnchor, padding: UIEdgeInsets(top: 25, left: 0, bottom: 0, right: 0),size: CGSize(width: 90, height: 30))
+
+
+        self.sitePasswordTextField.anchor(top: passwordLabelText.topAnchor, leading: separator.leadingAnchor, bottom: separatorTwo.bottomAnchor, trailing: showPassword.trailingAnchor, padding: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 30), size: CGSize(width: separator.frame.width, height: 30))
+
+
+        self.copyButtonTwo.anchor(top: sitePasswordTextField.topAnchor, leading: nil, bottom: nil, trailing: separatorTwo.trailingAnchor, size: CGSize(width: 25, height: 25))
+
+
+        self.showPassword.anchor(top: sitePasswordTextField.topAnchor, leading: nil, bottom: nil, trailing: copyButtonTwo.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 30),
+                                 size: CGSize(width: 25, height: 25))
+
+        self.separatorTwo.anchor(top: sitePasswordTextField.bottomAnchor, leading: separator.leadingAnchor, bottom: nil, trailing: separator.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),
+                                 size: CGSize(width: self.separator.frame.width, height: 2))
     }
 }
 

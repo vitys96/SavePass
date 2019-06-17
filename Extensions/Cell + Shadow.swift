@@ -9,7 +9,7 @@ extension UIView {
         self.layer.shadowRadius = 1.0
         self.layer.masksToBounds = false
         self.clipsToBounds = false
-        self.layer.cornerRadius = 3
+        self.layer.cornerRadius = 5
     }
 }
 

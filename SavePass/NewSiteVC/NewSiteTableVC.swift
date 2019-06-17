@@ -186,9 +186,6 @@ class NewSiteTableVC: UITableViewController {
             copyButton.isEnabled = false
         }
     }
-    
-    
-    
 }
 
 extension NewSiteTableVC {

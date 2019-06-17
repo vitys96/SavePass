@@ -1,30 +1,35 @@
+//
+//  CardsColViewCell.swift
+//  SavePass
+//
+//  Created by Виталий Охрименко on 17/06/2019.
+//  Copyright © 2019 kaboo. All rights reserved.
+//
 
 import UIKit
-import LocalAuthentication
 
-class SitesCollectionViewCell: UICollectionViewCell {
+class CardsColViewCell: UICollectionViewCell {
     
-    static let reuseId = "cell"
+    static let reuseIdentifier = "Cell"
     
-//    var site: Site? {
-//        didSet {
-//            guard let siteImage = site?.image else { return }
-//            guard let loginName = site?.name else { return }
-//            
-//            siteImageView.image = UIImage(named: siteImage)
-//            loginLabel.text = loginName
-//        }
-//    }
+    var site: Site? {
+        didSet {
+            guard let siteImage = site?.image else { return }
+            guard let loginName = site?.name else { return }
+            
+            siteImageView.image = UIImage(named: siteImage)
+            loginLabel.text = loginName
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        setCellShadow()
         
     }
     
     func setup() {
-        self.backgroundColor = .white
+//        self.backgroundColor = .white
         
         self.addSubview(backgroundLayer)
         self.backgroundLayer.addSubview(siteImageView)
@@ -32,7 +37,6 @@ class SitesCollectionViewCell: UICollectionViewCell {
         self.backgroundLayer.addSubview(loginLabel)
         
         backgroundLayer.fillSuperview()
-        
         siteImageView.anchor(top: backgroundLayer.topAnchor,
                              leading: backgroundLayer.leadingAnchor,
                              bottom: nil,
@@ -44,12 +48,10 @@ class SitesCollectionViewCell: UICollectionViewCell {
                         leading: backgroundLayer.leadingAnchor,
                         bottom: backgroundLayer.bottomAnchor,
                         trailing: backgroundLayer.trailingAnchor)
-        
         loginLabel.anchor(top: nil,
-                        leading: backgroundLayer.leadingAnchor,
-                        bottom: grayView.bottomAnchor,
-                        trailing: backgroundLayer.trailingAnchor,
-                        padding: UIEdgeInsets(top: 0, left: 5, bottom: 2, right: 10))
+                          leading: backgroundLayer.leadingAnchor,
+                          bottom: grayView.bottomAnchor,
+                          trailing: backgroundLayer.trailingAnchor)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -67,7 +69,7 @@ class SitesCollectionViewCell: UICollectionViewCell {
         animate(isHighlighted: false)
     }
     
-    private func animate(isHighlighted: Bool, completion: ((Bool) -> Void)?=nil) {
+    private func animate(isHighlighted: Bool, completion: ((Bool) -> Void)? = nil) {
         let animationOptions: UIView.AnimationOptions = [.allowUserInteraction]
         if isHighlighted {
             UIView.animate(withDuration: 0.5,
@@ -115,7 +117,7 @@ class SitesCollectionViewCell: UICollectionViewCell {
     let grayView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0  )
+        view.backgroundColor = UIColor(hexValue: "#dedede", alpha: 1.0)
         return view
     }()
     
@@ -123,5 +125,6 @@ class SitesCollectionViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
+
+

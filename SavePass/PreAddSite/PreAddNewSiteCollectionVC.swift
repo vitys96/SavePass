@@ -49,7 +49,7 @@ class PreAddNewSiteCollectionVC: UICollectionViewController, UICollectionViewDel
             layer.shadowColor = UIColor.red.cgColor
             layer.shadowOpacity = 1
             layer.frame = cell.frame
-            cell.teamNameLabel.textColor = .black
+            cell.siteNameLabel.textColor = .black
         default:
             break
         }
