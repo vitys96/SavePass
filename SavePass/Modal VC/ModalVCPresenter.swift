@@ -18,7 +18,7 @@ class ModalVcPresenterPresenter {
         let alertController = UIAlertController(title: "Вы уверены, что хотите поделиться?", message: "Имя сайта, его адрес, логин и пароль станут известны отправителю", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Поделиться", style: .default) { (action) in
-            let items = [self]
+            let items = [vc]
             
             let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
             vc.present(activityController, animated: true)

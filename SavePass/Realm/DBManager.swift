@@ -17,7 +17,25 @@ class DBManager {
         return results
     }
     
+    func getDataFromCardList() -> Results<CardList> {
+        
+        let results: Results<CardList> = database.objects(CardList.self)
+        //.sorted(byKeyPath: "siteName", ascending: true)
+        return results
+    }
+    
     func addDataSiteList(object: SiteList) {
+        do {
+            try database.write {
+                database.add(object, update: .all)
+            }
+        }
+        catch {
+            print ("error additing data to site list")
+        }
+    }
+    
+    func addDataCardList(object: CardList) {
         do {
             try database.write {
                 database.add(object, update: .all)

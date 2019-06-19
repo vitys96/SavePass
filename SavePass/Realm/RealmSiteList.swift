@@ -6,7 +6,6 @@
 //  Copyright © 2019 kaboo. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import RealmSwift
 
@@ -19,8 +18,6 @@ class SiteList: Object {
     @objc dynamic var siteLogin = ""
     @objc dynamic var sitePassword = ""
     @objc dynamic var notes = ""
-    
-    
     
     override static func primaryKey() -> String? {
         return "siteID"

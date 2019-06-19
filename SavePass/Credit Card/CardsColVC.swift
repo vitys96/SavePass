@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import SPStorkController
+import RealmSwift
 
 class CardsColVC: UICollectionViewController {
-
+    
+    let realm = try! Realm()
+    var selectedSite: SiteList!
+    
+    var arrayOfCards = [CardList]()
+    
+    @IBAction func addNewCard(_ sender: UIBarButtonItem) {
+        self.pushToAddSite()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.configureColView()
     }
     
@@ -21,19 +35,26 @@ class CardsColVC: UICollectionViewController {
         collectionView?.register(CardsColViewCell.self, forCellWithReuseIdentifier: CardsColViewCell.reuseIdentifier)
     }
     
+    private func pushToAddSite() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyBoard.instantiateViewController(withIdentifier: "NewCardTableVC") as? NewCardTableVC else { return }
+        
+        fadeInAnimationsNavigationController()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
     private func configureCell(cell: CardsColViewCell, indexPath: IndexPath) {
-        let item = DBManager.sharedInstance.getDataFromSiteList()[indexPath.item] as SiteList
-        cell.loginLabel.text = item.siteLogin
-        if let image = UIImage(data: item.siteImageView!) {
-            cell.siteImageView.image = image
-        }
+        let cardItem = DBManager.sharedInstance.getDataFromCardList()[indexPath.item] as CardList
+        cell.loginLabel.text = cardItem.cardNumber
+        let cardHexColor = cardItem.cardColor
+        cell.backgroundLayer.backgroundColor = UIColor(hexString: cardHexColor)
     }
 }
 
 extension CardsColVC {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DBManager.sharedInstance.getDataFromSiteList().count
+        return DBManager.sharedInstance.getDataFromCardList().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

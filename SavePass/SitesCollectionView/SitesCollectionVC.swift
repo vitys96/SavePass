@@ -11,7 +11,6 @@ class SitesCollectionVC: UICollectionViewController {
     var alert: UIAlertController!
     let userDefaults = UserDefaults.standard
     
-    let realm = try! Realm()
     var presenter = SitesCollectionVCPresenter()
     
     var selectedSite: SiteList!

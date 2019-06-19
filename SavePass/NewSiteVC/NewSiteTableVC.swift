@@ -74,11 +74,11 @@ class NewSiteTableVC: UITableViewController {
     
     // MARK: - Copy/Show buttons
     
-    @IBAction func LoginSiteCopyButton(_ sender: Any) {
+    @IBAction func loginSiteCopyButton(_ sender: Any) {
         copyTextInTextField(your: siteLogin)
     }
     
-    @IBAction func PasswordSiteCopyButton(_ sender: Any) {
+    @IBAction func passwordSiteCopyButton(_ sender: Any) {
         copyTextInTextField(your: sitePassword)
     }
     
@@ -87,7 +87,7 @@ class NewSiteTableVC: UITableViewController {
     }
     
     // MARK: - Dele site from Realm
-    @IBAction func DeleteSiteData(_ sender: Any) {
+    @IBAction func deleteSiteData(_ sender: Any) {
         
         let alertController = UIAlertController(title: "Удалить учетные данные", message: "Удаленные данные нельзя восставить.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
@@ -108,7 +108,6 @@ class NewSiteTableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configStartScreen()
     }
     
