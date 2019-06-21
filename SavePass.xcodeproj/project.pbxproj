@@ -72,6 +72,7 @@
 		F5546D58222C4374003CE563 /* PreAddNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D57222C4374003CE563 /* PreAddNSCollectionViewCell.swift */; };
 		F5546D5A222C4383003CE563 /* PreAddSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D59222C4383003CE563 /* PreAddSiteManager.swift */; };
 		F5546D5C222C43D8003CE563 /* Cell + Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */; };
+		F561FE2F22BD797300F1791E /* CardModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561FE2E22BD797300F1791E /* CardModalPresenter.swift */; };
 		F57D460922B51DAD00E372C2 /* SitesCollectionVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */; };
 		F57D460B22B5412D00E372C2 /* SitesCollectionVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */; };
 		F586F9A82235A83300B5D504 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586F9A72235A83300B5D504 /* DBManager.swift */; };
@@ -163,6 +164,7 @@
 		F5546D59222C4383003CE563 /* PreAddSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAddSiteManager.swift; sourceTree = "<group>"; };
 		F5546D5B222C43D8003CE563 /* Cell + Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell + Shadow.swift"; sourceTree = "<group>"; };
 		F5546D61222C496E003CE563 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		F561FE2E22BD797300F1791E /* CardModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModalPresenter.swift; sourceTree = "<group>"; };
 		F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesCollectionVCPresenter.swift; sourceTree = "<group>"; };
 		F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesCollectionVCView.swift; sourceTree = "<group>"; };
 		F586F9A72235A83300B5D504 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				F52229D922BCFF4900B74888 /* CardModalVC.swift */,
+				F561FE2E22BD797300F1791E /* CardModalPresenter.swift */,
 				F52229DB22BD00F000B74888 /* CardModalView.swift */,
 			);
 			path = "Card Modal VC";
@@ -462,11 +465,10 @@
 				F5546D28222C4148003CE563 /* Main.storyboard */,
 				F5546D24222C4148003CE563 /* AppDelegate.swift */,
 				F59D40A222B571DA00571695 /* View */,
-				F59D40A122B571CB00571695 /* Presenter */,
 				F5546D4A222C428B003CE563 /* SitesCollectionView */,
 				F5546D5F222C466A003CE563 /* Site Modal VC */,
-				F5546D60222C4681003CE563 /* NewSiteVC */,
 				F5546D5E222C465A003CE563 /* PreAddSite */,
+				F5546D60222C4681003CE563 /* NewSiteVC */,
 				F5DE49AD22B7FEAA00EA9355 /* Credit Card */,
 				F52229D822BCFF2B00B74888 /* Card Modal VC */,
 				F5DE49B222B8279000EA9355 /* NewCard VC */,
@@ -485,6 +487,7 @@
 			children = (
 				F5546D46222C423D003CE563 /* SitesCollectionVC.swift */,
 				F5546D48222C427D003CE563 /* SitesCollectionViewCell.swift */,
+				F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */,
 			);
 			path = SitesCollectionView;
 			sourceTree = "<group>";
@@ -526,14 +529,6 @@
 				F5546D4F222C4320003CE563 /* NewSiteTableViewCell.swift */,
 			);
 			path = NewSiteVC;
-			sourceTree = "<group>";
-		};
-		F59D40A122B571CB00571695 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		F59D40A222B571DA00571695 /* View */ = {
@@ -776,6 +771,7 @@
 				F57D460B22B5412D00E372C2 /* SitesCollectionVCView.swift in Sources */,
 				F53F780822BA72C400FA213B /* AttributedTextBlock.swift in Sources */,
 				F53F782222BA72C400FA213B /* ItemWithImage.swift in Sources */,
+				F561FE2F22BD797300F1791E /* CardModalPresenter.swift in Sources */,
 				F53F780E22BA72C400FA213B /* PhoneCodeCell.swift in Sources */,
 				F53F780B22BA72C400FA213B /* LocaleStore.swift in Sources */,
 				F5DE49B622B827D000EA9355 /* NewCardTableViewCell.swift in Sources */,

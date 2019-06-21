@@ -15,7 +15,7 @@ class CardsColViewCell: UICollectionViewCell {
     var cardItem: CardList? {
         didSet {
             nameOfCard.text = cardItem?.cardName
-            cardNumber.text = cardItem?.cardNumber
+            cardNumber.text = notVisibleString(string: cardItem!.cardNumber)
             
             let cardHexColor = cardItem?.cardColor
             backgroundLayer.backgroundColor = UIColor(hexString: cardHexColor!)

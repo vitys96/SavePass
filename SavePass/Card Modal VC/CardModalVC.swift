@@ -25,7 +25,6 @@ class CardModalVC: UIViewController {
 //    weak var presenter = ModalVcPresenterPresenter()
     
     var toggle = true
-    var titleLabel = String()
     
     let navBar = SPFakeBarView(style: .stork)
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -38,7 +37,7 @@ class CardModalVC: UIViewController {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .regular)
         return label
     }()
     
@@ -132,13 +131,13 @@ class CardModalVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navBar.titleLabel.text = self.titleLabel
+        self.configureStartScreen()
+        self.setup()
+    }
+    
+    private func configureStartScreen() {
         self.view.backgroundColor = UIColor.white
         self.modalPresentationCapturesStatusBarAppearance = true
-        
-        self.navBar.leftButton.setTitle("Поделиться", for: .normal)
-        self.navBar.leftButton.setTitleColor(.blue, for: .highlighted)
-        self.navBar.leftButton.addTarget(self, action: #selector(self.shareSite), for: .touchUpInside)
         
         self.navBar.rightButton.setTitle("Просмотреть", for: .normal)
         self.navBar.rightButton.addTarget(self, action: #selector(changeInfo), for: .touchUpInside)
@@ -146,10 +145,9 @@ class CardModalVC: UIViewController {
         [navBar, nameOfCard, separator, numberOfCard, copyButton, ownerLabel, dateOfExpiry, separatorTwo, cvNumber, showCVNumber, cvNumberText].forEach { (item) in
             self.view.addSubview(item)
         }
-        setup()
     }
     
-    func setup() {
+    private func setup() {
         nameOfCard.text = selectedCard?.cardName
         numberOfCard.text = selectedCard?.cardNumber
         numberOfCard.text = selectedCard?.cardNumber
@@ -167,11 +165,7 @@ class CardModalVC: UIViewController {
     }
     
     @objc func changeInfo() {
-        self.delegate?.didChangeInfo()
-    }
-    
-    @objc func shareSite() {
-//        self.presenter.shareSite(vc: self)
+        self.delegate?.changeCardInfo()
     }
     
     @objc private func showHideCv() {
@@ -257,7 +251,7 @@ class CardModalVC: UIViewController {
                                  leading: nil,
                                  bottom: nil,
                                  trailing: showCVNumber.leadingAnchor,
-                                 padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5))
+                                 padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10))
         
         showCVNumber.centerYAnchor.constraint(equalTo: cvNumber.centerYAnchor).isActive = true
         self.showCVNumber.anchor(top: nil,
@@ -266,27 +260,5 @@ class CardModalVC: UIViewController {
                                trailing: nil,
                                padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
                                size: CGSize(width: 25, height: 25))
-    }
-}
-
-extension CardModalVC: UIActivityItemSource {
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return ""
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        
-//        guard let siteName = selectedSite?.siteName,
-//            let siteLogin = selectedSite?.siteLogin,
-//            let sitePasswd = selectedSite?.sitePassword
-//            else { return ""}
-//
-//        return """
-//        \(siteName)
-//        \(siteLogin)
-//        \(sitePasswd)
-//        """
-        
-        return ""
     }
 }

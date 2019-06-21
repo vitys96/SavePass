@@ -120,7 +120,6 @@ class NewSiteTableVC: UITableViewController {
             textfield?.addTarget(self, action: #selector(logPasTextFieldDidChanged), for: .editingChanged)
         }
         if selectedSite == nil {
-            
             siteImageView.image = UIImage(named: imageViewString)
             siteName.text = siteAddressString.isEmpty ? "" : nameOfSiteString
             siteAddress.text = siteAddressString

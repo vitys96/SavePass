@@ -54,7 +54,7 @@ class CardsColVC: UICollectionViewController {
 
 extension CardsColVC: CardModalView {
     
-    func didChangeInfo() {
+    func changeCardInfo() {
 
         self.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
@@ -101,13 +101,13 @@ extension CardsColVC {
         modal.transitioningDelegate = transitionDelegate
         modal.modalPresentationStyle = .custom
         
-        
         modal.delegate = self
         modal.selectedCard = cardItem
+        self.selectedCard = cardItem
         
         present(modal, animated: true, completion: nil)
         
-        self.selectedCard = cardItem
+        
     }
 }
 

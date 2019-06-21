@@ -25,8 +25,8 @@ class SitesCollectionVC: UICollectionViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        checkCountOfSite()
-        collectionView.reloadData()
+        self.checkCountOfSite()
+        self.collectionView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -218,12 +218,6 @@ extension SitesCollectionVC: SiteModalDelegate {
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
             
-        }
-    }
-    
-    func reloadData() {
-        self.dismiss(animated: true) { [weak self] in
-            self?.collectionView.reloadData()
         }
     }
 }

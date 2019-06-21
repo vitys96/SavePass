@@ -58,7 +58,6 @@ class NewCardTableVC: UITableViewController {
         let alert = UIAlertController(style: .actionSheet)
         
         alert.addColorPicker(color: viewForChangeColor.backgroundColor!) { color in Log(color)
-            print (color.hexString)
             self.viewForChangeColor.backgroundColor = color
         }
         alert.addAction(title: "Отмена", style: .cancel)
@@ -73,10 +72,25 @@ class NewCardTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureStartScreen()
         self.setupUI()
         self.hideKeyboardWhenTappedAround()
         self.configureTextFields()
 
+    }
+    
+    private func configureStartScreen() {
+        if selectedCard != nil {
+            
+            nameOfCard.text = selectedCard?.cardName
+            nameOfOwner.text = selectedCard?.ownerName
+            numberOfCard.text = selectedCard?.cardNumber
+            dateOfexpiry.text = selectedCard?.dateExpiry
+            cvNumber.text = selectedCard?.cvNumber
+            let color = selectedCard?.cardColor
+            
+            self.viewForChangeColor.backgroundColor = UIColor(hexString: color!)
+        }
     }
 
     
@@ -100,9 +114,6 @@ class NewCardTableVC: UITableViewController {
             textField?.delegate = self
         }
     }
-    
-    
-
 }
 
 extension NewCardTableVC {

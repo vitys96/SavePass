@@ -10,5 +10,4 @@ import Foundation
 
 protocol SiteModalDelegate {
     func didChangeInfo()
-    func reloadData()
 }

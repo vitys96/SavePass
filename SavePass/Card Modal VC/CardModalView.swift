@@ -9,5 +9,5 @@
 import UIKit
 
 protocol CardModalView: class {
-    func didChangeInfo()
+    func changeCardInfo()
 }
