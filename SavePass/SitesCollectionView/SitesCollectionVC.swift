@@ -67,8 +67,8 @@ class SitesCollectionVC: UICollectionViewController {
     @objc private func pushToAddSite() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "PreAddNewSiteCollectionVC") as? PreAddNewSiteCollectionVC else { return }
-        
         fadeInAnimationsNavigationController()
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -203,19 +203,20 @@ extension SitesCollectionVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension SitesCollectionVC: ModalVCDelegate {
+extension SitesCollectionVC: SiteModalDelegate {
     func didChangeInfo() {
         
         self.searchController.isActive = false
         self.dismiss(animated: true) { [weak self] in
-            
-            self?.searchController.searchBar.text = nil
+            guard let self = self else { return }
+            self.searchController.searchBar.text = nil
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "NewSiteTableVC") as! NewSiteTableVC
             vc.isDeletedVisible = true
-            guard let selectedSite = self?.selectedSite else { return }
+            guard let selectedSite = self.selectedSite else { return }
             vc.selectedSite = selectedSite
-            self?.navigationController?.pushViewController(vc, animated: true)
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
             
         }
     }
@@ -245,7 +246,7 @@ extension SitesCollectionVC: UISearchBarDelegate {
 extension SitesCollectionVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentFor(searchText: searchController.searchBar.text!)
-        self.reloadData()
+        self.collectionView.reloadData()
     }
 }
 

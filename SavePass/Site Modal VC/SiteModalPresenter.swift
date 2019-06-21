@@ -8,14 +8,11 @@
 
 import UIKit
 
-
 class ModalVcPresenterPresenter {
-    
-    weak private var booksView: ModalVCViewProtocol?
     
     func shareSite(vc: UIViewController) {
         
-        let alertController = UIAlertController(title: "Вы уверены, что хотите поделиться?", message: "Имя сайта, его адрес, логин и пароль станут известны отправителю", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Вы уверены, что хотите поделиться?", message: "Имя сайта, адрес, логин и пароль станут известны отправителю", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Поделиться", style: .default) { (action) in
             let items = [vc]

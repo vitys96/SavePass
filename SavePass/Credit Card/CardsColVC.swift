@@ -13,7 +13,7 @@ import RealmSwift
 class CardsColVC: UICollectionViewController {
     
     let realm = try! Realm()
-    var selectedSite: SiteList!
+    var selectedCard: CardList?
     
     var arrayOfCards = [CardList]()
     
@@ -38,6 +38,7 @@ class CardsColVC: UICollectionViewController {
     private func pushToAddSite() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyBoard.instantiateViewController(withIdentifier: "NewCardTableVC") as? NewCardTableVC else { return }
+        vc.hidesBottomBarWhenPushed = true
         
         fadeInAnimationsNavigationController()
         self.navigationController?.pushViewController(vc, animated: false)
@@ -45,10 +46,33 @@ class CardsColVC: UICollectionViewController {
     
     private func configureCell(cell: CardsColViewCell, indexPath: IndexPath) {
         let cardItem = DBManager.sharedInstance.getDataFromCardList()[indexPath.item] as CardList
-        cell.loginLabel.text = cardItem.cardNumber
-        let cardHexColor = cardItem.cardColor
-        cell.backgroundLayer.backgroundColor = UIColor(hexString: cardHexColor)
+        
+        cell.cardItem = cardItem
     }
+    
+}
+
+extension CardsColVC: CardModalView {
+    
+    func didChangeInfo() {
+
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "NewCardTableVC") as! NewCardTableVC
+            vc.isDeletedVisible = true
+            guard let selectedCard = self.selectedCard else { return }
+            vc.selectedCard = selectedCard
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+//    func reloadData() {
+//        self.dismiss(animated: true) { [weak self] in
+//            self?.collectionView.reloadData()
+//        }
+//    }
 }
 
 extension CardsColVC {
@@ -64,14 +88,37 @@ extension CardsColVC {
         configureCell(cell: cell, indexPath: indexPath)
         return cell
     }
+    
+    // MARK: - Table View delegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cardItem = DBManager.sharedInstance.getDataFromCardList()[indexPath.item] as CardList
+        let modal = CardModalVC()
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        transitionDelegate.customHeight = 400
+        transitionDelegate.hapticMoments = [.willPresent, .willDismiss]
+        
+        modal.transitioningDelegate = transitionDelegate
+        modal.modalPresentationStyle = .custom
+        
+        
+        modal.delegate = self
+        modal.selectedCard = cardItem
+        
+        present(modal, animated: true, completion: nil)
+        
+        self.selectedCard = cardItem
+    }
 }
 
 extension CardsColVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width / 2) - 16, height: 100)
+        return CGSize(width: (view.frame.width / 2) - 8, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        return UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
     }
 }
+
+

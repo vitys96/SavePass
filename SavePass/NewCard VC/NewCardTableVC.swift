@@ -14,6 +14,7 @@ class NewCardTableVC: UITableViewController {
     let realm = try! Realm()
     var selectedCard: CardList?
     let expiryDatePicker = MonthYearPickerView()
+    var isDeletedVisible: Bool!
     
     @IBOutlet weak var nameOfCard: UITextField!
     @IBOutlet weak var nameOfOwner: UITextField!
@@ -99,7 +100,7 @@ class NewCardTableVC: UITableViewController {
             textField?.delegate = self
         }
     }
-
+    
     
 
 }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cih-6i-xYH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cih-6i-xYH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -345,7 +344,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aC5-du-LCx">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="aC5-du-LCx">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -459,6 +458,10 @@
         <scene sceneID="DrK-x7-E6H">
             <objects>
                 <viewController storyboardIdentifier="ContentVC" id="cfs-CB-d6R" customClass="ContentVC" customModule="SavePass" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="odt-ld-pyT"/>
+                        <viewControllerLayoutGuide type="bottom" id="KPk-2a-Fnt"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MaF-Qq-v9l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -469,7 +472,7 @@
                                 <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qyb-ei-c6k">
-                                <rect key="frame" x="137.5" y="164" width="100" height="100"/>
+                                <rect key="frame" x="137.5" y="154" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="8k1-AB-l7x"/>
                                     <constraint firstAttribute="width" secondItem="qyb-ei-c6k" secondAttribute="height" multiplier="1:1" id="At3-r9-gje"/>
@@ -477,7 +480,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создайте свой список любимых ресторанов" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1z-A7-Xgu" userLabel="description">
-                                <rect key="frame" x="37.5" y="323.5" width="300" height="40"/>
+                                <rect key="frame" x="37.5" y="313.5" width="300" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="VlV-qo-dhG"/>
                                 </constraints>
@@ -489,7 +492,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56r-e9-7eS">
-                                <rect key="frame" x="147" y="413.5" width="81" height="35"/>
+                                <rect key="frame" x="147" y="403.5" width="81" height="35"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <state key="normal" title="Открыть"/>
                                 <connections>
@@ -499,16 +502,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="HHh-Fh-OGa"/>
-                            <constraint firstItem="Fmt-GA-7wB" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="IJ5-bl-6aX"/>
+                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerX" secondItem="MaF-Qq-v9l" secondAttribute="centerX" id="HHh-Fh-OGa"/>
+                            <constraint firstItem="Fmt-GA-7wB" firstAttribute="centerX" secondItem="MaF-Qq-v9l" secondAttribute="centerX" id="IJ5-bl-6aX"/>
                             <constraint firstItem="56r-e9-7eS" firstAttribute="top" secondItem="a1z-A7-Xgu" secondAttribute="bottom" constant="50" id="PBw-gp-iew"/>
-                            <constraint firstItem="1mr-kg-rkf" firstAttribute="bottom" secondItem="Fmt-GA-7wB" secondAttribute="bottom" id="Va0-oj-ra4"/>
-                            <constraint firstItem="56r-e9-7eS" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="ljV-BW-OfG"/>
+                            <constraint firstItem="KPk-2a-Fnt" firstAttribute="top" secondItem="Fmt-GA-7wB" secondAttribute="bottom" id="Va0-oj-ra4"/>
+                            <constraint firstItem="56r-e9-7eS" firstAttribute="centerX" secondItem="MaF-Qq-v9l" secondAttribute="centerX" id="ljV-BW-OfG"/>
                             <constraint firstItem="a1z-A7-Xgu" firstAttribute="top" secondItem="qyb-ei-c6k" secondAttribute="bottom" constant="59.5" id="otB-T7-mdr"/>
-                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerY" secondItem="1mr-kg-rkf" secondAttribute="centerY" id="yve-0v-GRU"/>
-                            <constraint firstItem="qyb-ei-c6k" firstAttribute="centerX" secondItem="1mr-kg-rkf" secondAttribute="centerX" id="zPL-9Y-gpE"/>
+                            <constraint firstItem="a1z-A7-Xgu" firstAttribute="centerY" secondItem="MaF-Qq-v9l" secondAttribute="centerY" id="yve-0v-GRU"/>
+                            <constraint firstItem="qyb-ei-c6k" firstAttribute="centerX" secondItem="MaF-Qq-v9l" secondAttribute="centerX" id="zPL-9Y-gpE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="1mr-kg-rkf"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="qyb-ei-c6k" id="saE-S6-UP4"/>
@@ -524,7 +526,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="34q-0d-tNk">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cih-6i-xYH" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="cih-6i-xYH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jRp-Ml-5f7">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -810,7 +812,7 @@
         <!--Color Picker View Controller-->
         <scene sceneID="7Xn-aZ-wBC">
             <objects>
-                <viewController storyboardIdentifier="ColorPicker" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4M-f0-xi8" customClass="ColorPickerViewController" customModule="Alerts_Pickers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColorPicker" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4M-f0-xi8" customClass="ColorPickerViewController" customModule="SavePass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EyO-jb-NXg"/>
                         <viewControllerLayoutGuide type="bottom" id="BNa-68-glU"/>
@@ -849,8 +851,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mCc-fa-NMO">
                                         <rect key="frame" x="0.0" y="210" width="311" height="148"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jr-CY-Tph" customClass="GradientSlider" customModule="Alerts_Pickers" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="36"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jr-CY-Tph" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="-4" width="315" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="dRg-t8-qzQ"/>
                                                 </constraints>
@@ -869,8 +871,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-bA-eaW" customClass="GradientSlider" customModule="Alerts_Pickers" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="311" height="36"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-bA-eaW" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="52" width="315" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="5gy-ZV-MpU"/>
                                                 </constraints>
@@ -890,8 +892,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7A-Ey-aTO" customClass="GradientSlider" customModule="Alerts_Pickers" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="112" width="311" height="36"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7A-Ey-aTO" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
+                                                <rect key="frame" x="-2" y="108" width="315" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="VX2-Xq-TkX"/>
                                                 </constraints>
@@ -927,7 +929,6 @@
                             <constraint firstItem="BNa-68-glU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TLB-2l-2tA" secondAttribute="bottom" constant="32" id="fJp-iG-bmL"/>
                             <constraint firstAttribute="trailing" secondItem="TLB-2l-2tA" secondAttribute="trailing" constant="32" id="ob7-FD-CGT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ffW-BZ-b5S"/>
                     </view>
                     <connections>
                         <outlet property="brightnessSlider" destination="Lkn-bA-eaW" id="CiW-rC-sxv"/>
@@ -939,7 +940,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQs-RX-uG6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4202" y="973"/>
+            <point key="canvasLocation" x="4230" y="973"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NU9-0d-EKB">

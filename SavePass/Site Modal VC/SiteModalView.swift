@@ -8,6 +8,7 @@
 
 import Foundation
 
-protocol ModalVCViewProtocol: NSObjectProtocol {
-    func shareAlert()
+protocol SiteModalDelegate {
+    func didChangeInfo()
+    func reloadData()
 }

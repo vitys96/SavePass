@@ -43,7 +43,7 @@ final class TextViewerViewController: UIViewController {
         switch kind {
         case .text(let text):
             textView.text = text
-        case .attributedText(let text): break
+        case .attributedText: break
 //            textView.attributedText = text.map { $0.text }.joined(separator: "\n")
         }
         textView.textContainerInset = UIEdgeInsets(top: UI.hInset, left: UI.vInset, bottom: UI.hInset, right: UI.vInset)

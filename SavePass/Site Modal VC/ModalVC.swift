@@ -4,19 +4,13 @@ import SparrowKit
 import RealmSwift
 import SPFakeBar
 
-protocol ModalVCDelegate {
-    func didChangeInfo()
-    func reloadData()
-}
-
 class ModalVC: UIViewController {
     
     let realm = try! Realm()
     
     var selectedSite: SiteList?
     
-    var delegate: ModalVCDelegate?
-    
+    var delegate: SiteModalDelegate?
     var presenter = ModalVcPresenterPresenter()
     
     var toggle = true
