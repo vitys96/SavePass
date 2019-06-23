@@ -58,7 +58,19 @@ class DBManager {
         }
     }
     
-    func deleteFromDb(object: SiteList) {
+    func deleteSiteFromDb(object: SiteList) {
+        
+        do {
+            try database.write {
+                database.delete(object)
+            }
+        }
+        catch {
+            print ("error to delete site from database")
+        }
+    }
+    
+    func deleteCardFromDb(object: CardList) {
         
         do {
             try database.write {

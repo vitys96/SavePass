@@ -582,7 +582,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageViewCredidCard" translatesAutoresizingMaskIntoConstraints="NO" id="mnX-QT-Ny8">
-                                                    <rect key="frame" x="123.5" y="1" width="128" height="128"/>
+                                                    <rect key="frame" x="179.5" y="57" width="16" height="16"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -713,8 +713,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUI-NV-lyb">
-                                                    <rect key="frame" x="4" y="0.0" width="271" height="54.5"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUI-NV-lyb">
+                                                    <rect key="frame" x="16" y="0.0" width="274" height="54.5"/>
                                                     <state key="normal" title="Выбрать цвет">
                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -736,10 +736,10 @@
                                             <constraints>
                                                 <constraint firstItem="AOe-gR-d8l" firstAttribute="centerY" secondItem="2cl-ME-yVl" secondAttribute="centerY" id="0IN-Ly-sFS"/>
                                                 <constraint firstAttribute="trailing" secondItem="AOe-gR-d8l" secondAttribute="trailing" constant="45" id="4Rd-iq-kLb"/>
-                                                <constraint firstItem="BUI-NV-lyb" firstAttribute="centerY" secondItem="2cl-ME-yVl" secondAttribute="centerY" id="RNt-3g-fIC"/>
-                                                <constraint firstItem="AOe-gR-d8l" firstAttribute="leading" secondItem="BUI-NV-lyb" secondAttribute="trailing" constant="15" id="ZIH-Yk-LxO"/>
-                                                <constraint firstItem="BUI-NV-lyb" firstAttribute="leading" secondItem="2cl-ME-yVl" secondAttribute="leading" constant="4" id="oI3-xN-4tm"/>
-                                                <constraint firstItem="BUI-NV-lyb" firstAttribute="height" secondItem="2cl-ME-yVl" secondAttribute="height" id="pNq-tv-OkD"/>
+                                                <constraint firstItem="BUI-NV-lyb" firstAttribute="top" secondItem="2cl-ME-yVl" secondAttribute="top" id="PGC-fo-eUf"/>
+                                                <constraint firstItem="BUI-NV-lyb" firstAttribute="leading" secondItem="2cl-ME-yVl" secondAttribute="leading" constant="16" id="TrK-XE-3IL"/>
+                                                <constraint firstItem="AOe-gR-d8l" firstAttribute="leading" secondItem="BUI-NV-lyb" secondAttribute="trailing" id="etw-Ip-u8l"/>
+                                                <constraint firstAttribute="bottom" secondItem="BUI-NV-lyb" secondAttribute="bottom" id="iC4-6c-POx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -789,7 +789,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Добавление карты" leftItemsSupplementBackButton="YES" id="CIT-DN-gJF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SKa-IC-n8P">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="SKa-IC-n8P">
                             <connections>
                                 <action selector="saveButton:" destination="aUA-zc-QGL" id="uuT-3G-22Z"/>
                             </connections>
@@ -802,6 +802,7 @@
                         <outlet property="nameOfCard" destination="QSq-Ji-glG" id="pJg-Kh-aqa"/>
                         <outlet property="nameOfOwner" destination="1wK-LV-sUT" id="mTT-T1-BFR"/>
                         <outlet property="numberOfCard" destination="dl0-GF-xeF" id="81U-ko-QNj"/>
+                        <outlet property="saveCardButton" destination="SKa-IC-n8P" id="r2t-L7-jrs"/>
                         <outlet property="viewForChangeColor" destination="AOe-gR-d8l" id="LHr-1s-cNB"/>
                     </connections>
                 </tableViewController>
@@ -852,7 +853,7 @@
                                         <rect key="frame" x="0.0" y="210" width="311" height="148"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Jr-CY-Tph" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
-                                                <rect key="frame" x="-2" y="-4" width="315" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="dRg-t8-qzQ"/>
                                                 </constraints>
@@ -872,7 +873,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-bA-eaW" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
-                                                <rect key="frame" x="-2" y="52" width="315" height="44"/>
+                                                <rect key="frame" x="0.0" y="56" width="311" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="5gy-ZV-MpU"/>
                                                 </constraints>
@@ -893,7 +894,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7A-Ey-aTO" customClass="GradientSlider" customModule="SavePass" customModuleProvider="target">
-                                                <rect key="frame" x="-2" y="108" width="315" height="44"/>
+                                                <rect key="frame" x="0.0" y="112" width="311" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="VX2-Xq-TkX"/>
                                                 </constraints>

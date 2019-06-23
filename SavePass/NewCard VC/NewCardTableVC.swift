@@ -16,6 +16,8 @@ class NewCardTableVC: UITableViewController {
     let expiryDatePicker = MonthYearPickerView()
     var isDeletedVisible: Bool!
     
+    @IBOutlet weak var saveCardButton: UIBarButtonItem!
+    
     @IBOutlet weak var nameOfCard: UITextField!
     @IBOutlet weak var nameOfOwner: UITextField!
     @IBOutlet weak var numberOfCard: UITextField!
@@ -54,19 +56,25 @@ class NewCardTableVC: UITableViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @IBAction func changeColor(_ sender: Any) {
-        let alert = UIAlertController(style: .actionSheet)
-        
-        alert.addColorPicker(color: viewForChangeColor.backgroundColor!) { color in Log(color)
-            self.viewForChangeColor.backgroundColor = color
+    @IBAction func deleteAccountData(_ sender: Any) {
+        let alertController = UIAlertController(title: "Удалить учетные данные", message: "Удаленные данные нельзя восставить.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { (action) in
+            
+            guard let selectCard = self.selectedCard else { return }
+            DBManager.sharedInstance.deleteCardFromDb(object: selectCard)
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        alert.addAction(title: "Отмена", style: .cancel)
-        alert.show()
+        alertController.addAction(deleteAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func deleteAccountData(_ sender: Any) {
-        
+    @IBAction func changeColor(_ sender: Any) {
+        self.colorPicker()
     }
+    
     
     
     override func viewDidLoad() {
@@ -91,6 +99,16 @@ class NewCardTableVC: UITableViewController {
             
             self.viewForChangeColor.backgroundColor = UIColor(hexString: color!)
         }
+        
+        [nameOfCard, nameOfOwner].forEach { (textField) in
+            textField?.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        }
+        [dateOfexpiry, numberOfCard, cvNumber].forEach { (textField) in
+            textField?.addTarget(self, action: #selector(textFieldDidChange), for: .allEditingEvents)
+        }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(viewForChangeColorTapped))
+        tap.numberOfTapsRequired = 1
+        viewForChangeColor.addGestureRecognizer(tap)
     }
 
     
@@ -109,9 +127,43 @@ class NewCardTableVC: UITableViewController {
             self.dateOfexpiry.text = string
         }
         
-        [numberOfCard, cvNumber].forEach { textField in
-            textField?.keyboardType = .numberPad
+        
+        [numberOfCard, cvNumber, nameOfCard, nameOfOwner].forEach { textField in
             textField?.delegate = self
+        }
+        numberOfCard.keyboardType = .numberPad
+        cvNumber.keyboardType = .numberPad
+    }
+    
+    private func colorPicker() {
+        let alert = UIAlertController(style: .actionSheet)
+        
+        alert.addColorPicker(color: viewForChangeColor.backgroundColor!) { color in Log(color)
+            self.viewForChangeColor.backgroundColor = color
+            self.saveCardButton.isEnabled = true
+        }
+        alert.addAction(title: "Отмена", style: .cancel)
+        alert.show()
+    }
+    
+    @objc private func viewForChangeColorTapped() {
+        self.colorPicker()
+    }
+    
+    @objc private func textFieldDidChange() {
+        guard
+            let cardName = nameOfCard.text,
+            let ownerName = nameOfOwner.text,
+            let numberCard = numberOfCard.text,
+            let dateExp = dateOfexpiry.text,
+            let cv = cvNumber.text
+            
+            else { return }
+        
+        if !cardName.isEmpty && !ownerName.isEmpty && !numberCard.isEmpty && !dateExp.isEmpty && !cv.isEmpty {
+            self.saveCardButton.isEnabled = true
+        } else {
+            self.saveCardButton.isEnabled = false
         }
     }
 }
@@ -144,22 +196,9 @@ extension NewCardTableVC {
         case 2:
             return 1
         case 3:
-            return 1
+            return selectedCard == nil ? 0 : 1
         default:
             return 0
-        }
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 2:
-            switch indexPath.row {
-            case 0:
-                print ("alala")
-            default:
-                break
-            }
-        default:
-            break
         }
     }
     
@@ -167,20 +206,31 @@ extension NewCardTableVC {
 
 extension NewCardTableVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+
         if let text = textField.text {
             let lastText = (text as NSString).replacingCharacters(in: range, with: string) as String
-            
+
             if numberOfCard == textField {
                 textField.text = lastText.format("nnnn nnnn nnnn nnnn", oldString: text)
                 return false
             }
             if cvNumber == textField {
-                textField.text = lastText.format("nnn", oldString: text)
-                return false
+                let currentText = textField.text ?? ""
+                guard let stringRange = Range(range, in: currentText) else { return false }
+                
+                let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+                
+                return updatedText.count <= 3
             }
         }
         return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        self.nameOfCard.resignFirstResponder()
+        self.nameOfOwner.resignFirstResponder()
+        return true;
     }
 }
 

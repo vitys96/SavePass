@@ -93,9 +93,9 @@ class NewSiteTableVC: UITableViewController {
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { (action) in
             
-            try! self.realm.write {
-                self.realm.delete(self.selectedSite!)
-            }
+            
+            guard let selectSite = self.selectedSite else { return }
+            DBManager.sharedInstance.deleteSiteFromDb(object: selectSite)
             self.navigationController?.popToRootViewController(animated: true)
         }
         alertController.addAction(deleteAction)
@@ -147,7 +147,7 @@ class NewSiteTableVC: UITableViewController {
     @objc private func logPasTextFieldDidChanged() {
         
         guard let login = siteLogin.text else { return }
-        if !(login.isEmpty) {
+        if !login.isEmpty {
             enableCopyButton(copyButton: copySiteLoginOutlet, enabled: true)
         }
         else {
@@ -155,7 +155,7 @@ class NewSiteTableVC: UITableViewController {
         }
         
         guard let password = sitePassword.text else { return }
-        if !(password.isEmpty) {
+        if !password.isEmpty {
             enableCopyButton(copyButton: copySitePasswordOutlet, enabled: true)
             enableCopyButton(copyButton: showHidePassword, enabled: true)
         }

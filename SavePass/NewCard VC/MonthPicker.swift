@@ -52,13 +52,13 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         // population months with localized names
         var months: [String] = []
         var month = 0
-        for _ in 1...12 {
-//            months.append(DateFormatter().shortMonthSymbols)
+        for index in 1...12 {
             let dateFormatter = DateFormatter()
-            months.append(dateFormatter.standaloneMonthSymbols[month].capitalized)
+            months.append(String(format: "%02i", index) + " - " + dateFormatter.standaloneMonthSymbols[month].capitalized)
             month += 1
         }
         self.months = months
+        print (months)
         
         self.delegate = self
         self.dataSource = self
@@ -107,7 +107,7 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return component == 0 ? 140 : 80
+        return component == 0 ? 180 : 80
     }
     
 }
