@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A4190E1D016DAB4A84464EBE /* Pods_SavePass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B2F297DD053C5C226228BE /* Pods_SavePass.framework */; };
+		F519690F22C643670049C91D /* HALTER__.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F519690E22C643660049C91D /* HALTER__.ttf */; };
+		F519692022C6767C0049C91D /* CardsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F519691F22C6767C0049C91D /* CardsPresenter.swift */; };
+		F519692222C676F20049C91D /* CardsCollectionVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F519692122C676F20049C91D /* CardsCollectionVCView.swift */; };
+		F519692422C7BC880049C91D /* RecognizerVС.swift in Sources */ = {isa = PBXBuildFile; fileRef = F519692322C7BC880049C91D /* RecognizerVС.swift */; };
 		F52229DA22BCFF4900B74888 /* CardModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52229D922BCFF4900B74888 /* CardModalVC.swift */; };
 		F52229DC22BD00F000B74888 /* CardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52229DB22BD00F000B74888 /* CardModalView.swift */; };
 		F53F77F722BA72C400FA213B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53F77A822BA72C300FA213B /* Array+Extensions.swift */; };
@@ -97,6 +101,11 @@
 		66FC1D7D4C8A7E1123427C09 /* Pods-SavePass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavePass.release.xcconfig"; path = "Pods/Target Support Files/Pods-SavePass/Pods-SavePass.release.xcconfig"; sourceTree = "<group>"; };
 		93B2F297DD053C5C226228BE /* Pods_SavePass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SavePass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1404001B48A7D7B34D3BF2 /* Pods-SavePass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SavePass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SavePass/Pods-SavePass.debug.xcconfig"; sourceTree = "<group>"; };
+		F519690D22C641890049C91D /* HALTER.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HALTER.ttf; sourceTree = "<group>"; };
+		F519690E22C643660049C91D /* HALTER__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HALTER__.ttf; sourceTree = "<group>"; };
+		F519691F22C6767C0049C91D /* CardsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsPresenter.swift; sourceTree = "<group>"; };
+		F519692122C676F20049C91D /* CardsCollectionVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionVCView.swift; sourceTree = "<group>"; };
+		F519692322C7BC880049C91D /* RecognizerVС.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecognizerVС.swift"; sourceTree = "<group>"; };
 		F52229D922BCFF4900B74888 /* CardModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModalVC.swift; sourceTree = "<group>"; };
 		F52229DB22BD00F000B74888 /* CardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModalView.swift; sourceTree = "<group>"; };
 		F53F77A822BA72C300FA213B /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -215,6 +224,22 @@
 				93B2F297DD053C5C226228BE /* Pods_SavePass.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F519690C22C641660049C91D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F519690D22C641890049C91D /* HALTER.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F519692522C7BC8E0049C91D /* Recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				F519692322C7BC880049C91D /* RecognizerVС.swift */,
+			);
+			path = Recognizer;
 			sourceTree = "<group>";
 		};
 		F52229D822BCFF2B00B74888 /* Card Modal VC */ = {
@@ -442,6 +467,7 @@
 		F5546D18222C4148003CE563 = {
 			isa = PBXGroup;
 			children = (
+				F519690E22C643660049C91D /* HALTER__.ttf */,
 				F5546D23222C4148003CE563 /* SavePass */,
 				F5B40E6722B43C6700EE7E64 /* Extensions */,
 				F53F77A622BA72C300FA213B /* Source */,
@@ -462,14 +488,15 @@
 		F5546D23222C4148003CE563 /* SavePass */ = {
 			isa = PBXGroup;
 			children = (
+				F519690C22C641660049C91D /* Fonts */,
 				F5546D28222C4148003CE563 /* Main.storyboard */,
 				F5546D24222C4148003CE563 /* AppDelegate.swift */,
-				F59D40A222B571DA00571695 /* View */,
 				F5546D4A222C428B003CE563 /* SitesCollectionView */,
 				F5546D5F222C466A003CE563 /* Site Modal VC */,
 				F5546D5E222C465A003CE563 /* PreAddSite */,
 				F5546D60222C4681003CE563 /* NewSiteVC */,
-				F5DE49AD22B7FEAA00EA9355 /* Credit Card */,
+				F5DE49AD22B7FEAA00EA9355 /* CardsCollectionView */,
+				F519692522C7BC8E0049C91D /* Recognizer */,
 				F52229D822BCFF2B00B74888 /* Card Modal VC */,
 				F5DE49B222B8279000EA9355 /* NewCard VC */,
 				F5B40E5E22B43AB800EE7E64 /* Model */,
@@ -488,6 +515,7 @@
 				F5546D46222C423D003CE563 /* SitesCollectionVC.swift */,
 				F5546D48222C427D003CE563 /* SitesCollectionViewCell.swift */,
 				F57D460822B51DAD00E372C2 /* SitesCollectionVCPresenter.swift */,
+				F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */,
 			);
 			path = SitesCollectionView;
 			sourceTree = "<group>";
@@ -531,14 +559,6 @@
 			path = NewSiteVC;
 			sourceTree = "<group>";
 		};
-		F59D40A222B571DA00571695 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				F57D460A22B5412D00E372C2 /* SitesCollectionVCView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		F5B40E5E22B43AB800EE7E64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,13 +580,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		F5DE49AD22B7FEAA00EA9355 /* Credit Card */ = {
+		F5DE49AD22B7FEAA00EA9355 /* CardsCollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				F5DE49AE22B7FEF400EA9355 /* CardsColVC.swift */,
 				F5DE49B022B7FF1300EA9355 /* CardsColViewCell.swift */,
+				F519691F22C6767C0049C91D /* CardsPresenter.swift */,
+				F519692122C676F20049C91D /* CardsCollectionVCView.swift */,
 			);
-			path = "Credit Card";
+			path = CardsCollectionView;
 			sourceTree = "<group>";
 		};
 		F5DE49B222B8279000EA9355 /* NewCard VC */ = {
@@ -650,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F53F780A22BA72C400FA213B /* Countries.bundle in Resources */,
+				F519690F22C643670049C91D /* HALTER__.ttf in Resources */,
 				F5546D2F222C4149003CE563 /* LaunchScreen.storyboard in Resources */,
 				F5546D2C222C4149003CE563 /* Assets.xcassets in Resources */,
 				F5546D2A222C4148003CE563 /* Main.storyboard in Resources */,
@@ -691,6 +714,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SavePass/Pods-SavePass-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AppLocker/AppLocker.framework",
+				"${PODS_ROOT}/PayCardsRecognizer/Source/PayCardsRecognizer.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SPFakeBar/SPFakeBar.framework",
@@ -703,6 +727,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppLocker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PayCardsRecognizer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPFakeBar.framework",
@@ -734,6 +759,7 @@
 				F53F780322BA72C400FA213B /* UIAlertController+Extensions.swift in Sources */,
 				F53F77FD22BA72C400FA213B /* String+Extensions.swift in Sources */,
 				F5B40E6222B43B4400EE7E64 /* UIColor + Gradient.swift in Sources */,
+				F519692422C7BC880049C91D /* RecognizerVС.swift in Sources */,
 				F5546D25222C4148003CE563 /* AppDelegate.swift in Sources */,
 				F53F77FB22BA72C400FA213B /* UIView+Extensions.swift in Sources */,
 				F53F781422BA72C400FA213B /* PhotoLibraryPickerViewController.swift in Sources */,
@@ -754,6 +780,7 @@
 				F53F77F922BA72C400FA213B /* UIImageView+Extensions.swift in Sources */,
 				F53F782722BA72C400FA213B /* Label.swift in Sources */,
 				F53F780222BA72C400FA213B /* UIApplication+Extensions.swift in Sources */,
+				F519692222C676F20049C91D /* CardsCollectionVCView.swift in Sources */,
 				F5DE49B122B7FF1300EA9355 /* CardsColViewCell.swift in Sources */,
 				F53F781522BA72C400FA213B /* LocationSearchResultsViewController.swift in Sources */,
 				F5546D50222C4320003CE563 /* NewSiteTableViewCell.swift in Sources */,
@@ -774,6 +801,7 @@
 				F561FE2F22BD797300F1791E /* CardModalPresenter.swift in Sources */,
 				F53F780E22BA72C400FA213B /* PhoneCodeCell.swift in Sources */,
 				F53F780B22BA72C400FA213B /* LocaleStore.swift in Sources */,
+				F519692022C6767C0049C91D /* CardsPresenter.swift in Sources */,
 				F5DE49B622B827D000EA9355 /* NewCardTableViewCell.swift in Sources */,
 				F52229DC22BD00F000B74888 /* CardModalView.swift in Sources */,
 				F5546D52222C4336003CE563 /* SiteManager.swift in Sources */,

@@ -37,8 +37,8 @@ class SitesCollectionViewCell: UICollectionViewCell {
                              leading: backgroundLayer.leadingAnchor,
                              bottom: nil,
                              trailing: backgroundLayer.trailingAnchor,
-                             padding: UIEdgeInsets(top: 8, left: 10, bottom: 0, right: 10),
-                             size: CGSize(width: 52, height: 52))
+                             padding: UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 10),
+                             size: CGSize(width: 40, height: 40))
         
         grayView.anchor(top: nil,
                         leading: backgroundLayer.leadingAnchor,
@@ -49,7 +49,7 @@ class SitesCollectionViewCell: UICollectionViewCell {
                         leading: backgroundLayer.leadingAnchor,
                         bottom: grayView.bottomAnchor,
                         trailing: backgroundLayer.trailingAnchor,
-                        padding: UIEdgeInsets(top: 0, left: 5, bottom: 2, right: 10))
+                        padding: UIEdgeInsets(top: 0, left: 5, bottom: 4, right: 10))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,7 +107,7 @@ class SitesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
         return label
     }()

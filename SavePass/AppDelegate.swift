@@ -13,8 +13,7 @@ import LocalAuthentication
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var v = UIView()
-    var v2 = UIImageView()
+    let blurredView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -29,15 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillResignActive(_ application: UIApplication) {
         guard let winddow = window else { return }
-        v = UIView(frame: winddow.bounds)
-        v2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-        v2.center.x = v.center.x
-        v2.center.y = v.center.y
-        
-        v2.image = UIImage(named: "shieldy")
-        winddow.addSubview(v)
-        v.backgroundColor = UIColor(hexValue: "#9A9A9A", alpha: 1.0)
-        v.addSubview(v2)
+        blurredView.frame = winddow.bounds
+        winddow.addSubview(blurredView)
         
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -54,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        v.removeFromSuperview()
+        blurredView.removeFromSuperview()
 //        v2.removeFromSuperview()
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import PayCardsRecognizer
 
 class NewCardTableVC: UITableViewController {
 
@@ -15,6 +16,7 @@ class NewCardTableVC: UITableViewController {
     var selectedCard: CardList?
     let expiryDatePicker = MonthYearPickerView()
     var isDeletedVisible: Bool!
+    var result: PayCardsRecognizerResult?
     
     @IBOutlet weak var saveCardButton: UIBarButtonItem!
     
@@ -55,8 +57,8 @@ class NewCardTableVC: UITableViewController {
         
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
     @IBAction func deleteAccountData(_ sender: Any) {
+    
         let alertController = UIAlertController(title: "Удалить учетные данные", message: "Удаленные данные нельзя восставить.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { (action) in
@@ -76,9 +78,14 @@ class NewCardTableVC: UITableViewController {
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameOfOwner.text = result?.recognizedHolderName
+        numberOfCard.text = result?.recognizedNumber?.format("nnnn nnnn nnnn nnnn", oldString: "")
+        if let month = result?.recognizedExpireDateMonth, let year = result?.recognizedExpireDateYear {
+            dateOfexpiry.text = String(format: "%@/%@", month, year)
+        }
         
         configureStartScreen()
         self.setupUI()

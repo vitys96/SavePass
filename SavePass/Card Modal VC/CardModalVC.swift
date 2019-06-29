@@ -32,7 +32,7 @@ class CardModalVC: UIViewController {
     var nameOfCard: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        label.textColor = #colorLiteral(red: 0.5768421292, green: 0.6187390685, blue: 0.664434731, alpha: 1)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -49,20 +49,21 @@ class CardModalVC: UIViewController {
     }()
     
     var numberOfCard: UITextField = {
-        let cardName = UITextField()
-        cardName.translatesAutoresizingMaskIntoConstraints = false
-        cardName.isEnabled = false
-        cardName.textColor = .black
-        cardName.adjustsFontSizeToFitWidth = true
-        cardName.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        return cardName
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isEnabled = false
+        textField.textColor = .black
+        textField.adjustsFontSizeToFitWidth = true
+        textField.minimumFontSize = 14
+        textField.font = UIFont(name: "Halter", size: 17)
+        return textField
     }()
     
     var copyButton: UIButton = {
         let copy = UIButton()
         copy.translatesAutoresizingMaskIntoConstraints = false
         copy.setBackgroundImage(UIImage(named: "copyImage"), for: .normal)
-        copy.contentMode = .scaleAspectFit
+        copy.adjustsImageSizeForAccessibilityContentSizeCategory = true
         copy.addTarget(self, action: #selector(copyCardNumber), for: .touchUpInside)
         
         return copy
@@ -71,12 +72,12 @@ class CardModalVC: UIViewController {
     var ownerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
+//        label.textColor = .gray
         label.textAlignment = .left
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.1
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+//        label.minimumScaleFactor = 0.1
+        label.font = UIFont(name: "Halter", size: 11)
         return label
     }()
     
@@ -88,7 +89,7 @@ class CardModalVC: UIViewController {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        label.font = UIFont(name: "Halter", size: 11)
         return label
     }()
     
@@ -205,16 +206,16 @@ class CardModalVC: UIViewController {
         self.numberOfCard.anchor(top: separator.bottomAnchor,
                                       leading: nil,
                                       bottom: nil,
-                                      trailing: copyButton.leadingAnchor,
-                                      padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+                                      trailing: nil,
+                                      padding: UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0))
 
         
         copyButton.centerYAnchor.constraint(equalTo: numberOfCard.centerYAnchor).isActive = true
         self.copyButton.anchor(top: nil,
-                               leading: nil,
+                               leading: numberOfCard.trailingAnchor,
                                bottom: nil,
-                               trailing: nil,
-                               padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+                               trailing: view.trailingAnchor,
+                               padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10),
                                size: CGSize(width: 25, height: 25))
         
         self.ownerLabel.centerXAnchor.constraint(equalTo: self.nameOfCard.centerXAnchor).isActive = true
@@ -222,14 +223,14 @@ class CardModalVC: UIViewController {
                                leading: nil,
                                bottom: nil,
                                trailing: nil,
-                               padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+                               padding: UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0))
         
         self.dateOfExpiry.centerXAnchor.constraint(equalTo: self.nameOfCard.centerXAnchor).isActive = true
         self.dateOfExpiry.anchor(top: ownerLabel.bottomAnchor,
                                leading: nil,
                                bottom: nil,
                                trailing: nil,
-                               padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
+                               padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
         
         self.separatorTwo.anchor(top: dateOfExpiry.bottomAnchor,
                               leading: view.leadingAnchor,
@@ -250,15 +251,16 @@ class CardModalVC: UIViewController {
         self.cvNumber.anchor(top: cvNumberText.bottomAnchor,
                                  leading: nil,
                                  bottom: nil,
-                                 trailing: showCVNumber.leadingAnchor,
-                                 padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 10))
+                                 trailing: nil,
+                                 padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 7),
+                                 size: CGSize(width: 30, height: 30))
         
         showCVNumber.centerYAnchor.constraint(equalTo: cvNumber.centerYAnchor).isActive = true
         self.showCVNumber.anchor(top: nil,
-                               leading: nil,
+                               leading: cvNumber.trailingAnchor,
                                bottom: nil,
                                trailing: nil,
-                               padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+                               padding: UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 0),
                                size: CGSize(width: 25, height: 25))
     }
 }

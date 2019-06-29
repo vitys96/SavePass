@@ -1,6 +1,7 @@
 PODS:
   - AppLocker (2.0):
     - Valet
+  - PayCardsRecognizer (1.1.4)
   - Realm (3.16.1):
     - Realm/Headers (= 3.16.1)
   - Realm/Headers (3.16.1)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - AppLocker
+  - PayCardsRecognizer
   - RealmSwift
   - SparrowKit
   - SPFakeBar
@@ -21,6 +23,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AppLocker
+    - PayCardsRecognizer
     - Realm
     - RealmSwift
     - SparrowKit
@@ -30,6 +33,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AppLocker: ad734b8027d26ae5cbb4a70eed2bed30159c3b71
+  PayCardsRecognizer: b939eec21c6890d57c9f22cb8856517922b097a2
   Realm: 601cacc51d8be3b17a377ef787be0f6ee0e76cf1
   RealmSwift: 486f2e09d5a8ccff63ed66e48d0846b111deb5e5
   SparrowKit: 3cfae4791388f8c9eab867eb7c828d60d650de69
@@ -37,6 +41,6 @@ SPEC CHECKSUMS:
   SPStorkController: f74a60dbcd3c35180c996688873f6eadac839642
   Valet: 41882ffa9ed80c5358584837bcf762dfd1888818
 
-PODFILE CHECKSUM: 7698c8ea6adf8c50e666782241f1fb8275e1c8a6
+PODFILE CHECKSUM: 9a7e459aee6c961b0ed2dc80318160929fb14c08
 
 COCOAPODS: 1.5.3

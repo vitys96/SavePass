@@ -11,4 +11,5 @@ pod 'SparrowKit'
 pod 'AppLocker'
 pod 'RealmSwift'
 pod 'SPFakeBar'
+pod 'PayCardsRecognizer'
 end

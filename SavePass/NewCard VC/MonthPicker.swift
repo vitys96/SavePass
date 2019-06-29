@@ -58,7 +58,6 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
             month += 1
         }
         self.months = months
-        print (months)
         
         self.delegate = self
         self.dataSource = self
